@@ -1,0 +1,22 @@
+{
+  "name": "@uifx/core",
+  "version": "0.1.0",
+  "description": "Framework-free effects: theme wave transition, CSS glitch kit, reel title, pixel field, pull-cord.",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": "./src/index.js",
+    "./index.css": "./src/index.css",
+    "./theme-transition.css": "./src/theme-transition/theme-transition.css",
+    "./glitch.css": "./src/glitch/glitch.css",
+    "./reel-title.css": "./src/reel-title/reel-title.css",
+    "./pixel-field.css": "./src/pixel-field/pixel-field.css",
+    "./pull-cord.css": "./src/pull-cord/pull-cord.css"
+  },
+  "files": [
+    "src"
+  ]
+}

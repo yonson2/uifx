@@ -1,0 +1,19 @@
+{
+  "name": "@uifx/react",
+  "version": "0.1.0",
+  "description": "React components for @uifx/core.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@uifx/core": "0.1.0"
+  },
+  "peerDependencies": {
+    "react": ">=19"
+  }
+}

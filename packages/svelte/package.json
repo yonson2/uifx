@@ -1,0 +1,23 @@
+{
+  "name": "@uifx/svelte",
+  "version": "0.1.0",
+  "description": "Svelte 5 components for @uifx/core.",
+  "license": "MIT",
+  "type": "module",
+  "svelte": "./src/index.js",
+  "exports": {
+    ".": {
+      "svelte": "./src/index.js",
+      "default": "./src/index.js"
+    }
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@uifx/core": "0.1.0"
+  },
+  "peerDependencies": {
+    "svelte": ">=5.16"
+  }
+}

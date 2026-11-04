@@ -1,0 +1,88 @@
+/* Pixel field. See pixel-field.js. */
+
+.uifx-pixel-field {
+  --uifx-pf-bg: #dfe1e8;
+  --uifx-pf-dim: #a7b6dd;
+  --uifx-pf-mid: #6c8de0;
+  --uifx-pf-lit: #2e63e8;
+  --uifx-pf-hover: #244fbf;
+  --uifx-pf-crest: #173a8a;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--uifx-pf-bg);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .uifx-pixel-field {
+    --uifx-pf-bg: #0d0f16;
+    --uifx-pf-dim: #233052;
+    --uifx-pf-mid: #3c5596;
+    --uifx-pf-lit: #6f92f2;
+    --uifx-pf-hover: #9bb3f6;
+    --uifx-pf-crest: #d2ddfb;
+  }
+}
+
+:root[data-theme="dark"] .uifx-pixel-field {
+  --uifx-pf-bg: #0d0f16;
+  --uifx-pf-dim: #233052;
+  --uifx-pf-mid: #3c5596;
+  --uifx-pf-lit: #6f92f2;
+  --uifx-pf-hover: #9bb3f6;
+  --uifx-pf-crest: #d2ddfb;
+}
+
+/* Behind the content, without changing how the content is positioned. */
+.uifx-pixel-field > .uifx-pixel-field-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  animation: uifx-pf-warmup 0.9s ease-out both;
+}
+
+/* A spacer that the canvas draws the wordmark into. */
+.uifx-pixel-field-wordmark {
+  display: block;
+  width: min(88%, 56rem);
+  margin-inline: auto;
+}
+
+/* Content that rises in, one item after the other: set --uifx-stagger to 0, 1, 2, ... */
+.uifx-rise {
+  animation: uifx-rise 0.55s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: calc(var(--uifx-stagger, 0) * 90ms);
+}
+
+@keyframes uifx-pf-warmup {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes uifx-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uifx-pixel-field > .uifx-pixel-field-canvas,
+  .uifx-rise {
+    animation: none;
+  }
+}

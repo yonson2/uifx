@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>uifx: ported web effects</title>
+    <meta name="description" content="A theme wave, a CSS glitch kit, an editable reel title, a pixel field and a pull-cord, for plain HTML, React, Vue and Svelte." />
+    <script>
+      try {
+        const theme = localStorage.getItem("uifx-theme");
+        if (theme) document.documentElement.setAttribute("data-theme", theme);
+      } catch {}
+    </script>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./">uifx</a>
+      <nav class="site-nav" aria-label="Framework">
+        <a href="./" aria-current="page">HTML</a>
+        <a href="./react/">React</a>
+        <a href="./vue/">Vue</a>
+        <a href="./svelte/">Svelte</a>
+      </nav>
+      <div class="theme-buttons">
+        <button class="button" type="button" data-theme-set="light">Light</button>
+        <button class="button" type="button" data-theme-set="dark">Dark</button>
+      </div>
+    </header>
+
+    <div id="cord"></div>
+
+    <main>
+      <section class="hero" id="hero" aria-label="Pixel field demo">
+        <div data-pf-wordmark></div>
+        <div class="hero-copy" data-pf-quiet>
+          <h1 class="uifx-rise" style="--uifx-stagger: 0">Five web effects, for plain HTML, React, Vue and Svelte.</h1>
+          <p class="uifx-rise" style="--uifx-stagger: 1">
+            A theme wave, a CSS glitch kit, an editable reel title, this pixel field and a pull-cord. Each one has a framework-free core and thin wrappers.
+          </p>
+          <div class="hero-actions uifx-rise" style="--uifx-stagger: 2">
+            <a class="button primary" href="#pixel-field">See the effects</a>
+            <a class="button" href="#credits">Credits</a>
+          </div>
+          <p class="hero-hint uifx-rise" style="--uifx-stagger: 3">Move the pointer. Press and hold, then let go. Click the word.</p>
+        </div>
+      </section>
+
+      <section class="section" id="pixel-field">
+        <div class="eyebrow">01 · Pixel field</div>
+        <h2>Dithered pixel background</h2>
+        <p class="credit">After the hero of <a href="https://omarchy.org/">omarchy.org</a>. Reimplemented on a canvas; no brand assets.</p>
+        <p class="lead">
+          Drifting noise, cut by an ordered dither, gets stronger toward the edges. The pointer and a wandering ghost light up the cells near them. Press and hold to
+          stamp a ripple. Click the word, or a button below, for an entrance effect.
+        </p>
+        <div class="controls" id="effects">
+          <button class="button" type="button" data-effect="random">Random</button>
+        </div>
+        <div class="controls">
+          <label>Text <input type="text" id="field-text" value="PORTED" maxlength="10" spellcheck="false" /></label>
+        </div>
+        <div data-snippets="pixelField"></div>
+      </section>
+
+      <section class="section" id="reel-title">
+        <div class="eyebrow">02 · Reel title</div>
+        <h2>Editable slot-machine title</h2>
+        <p class="credit">After the "OpenCode Reloaded" title by Kit Langton on <a href="https://anoma.ly/notes/opencode-reloaded">anoma.ly</a>.</p>
+        <p class="lead">A glass lens visits each typo and fixes it: a reel rolls, an extra letter shakes and collapses, a swapped pair turns on a belt. Then you can edit it.</p>
+        <div class="stage">
+          <div class="reel-stage"><div id="reel"></div></div>
+        </div>
+        <div class="controls">
+          <button class="button" type="button" id="reel-replay">Replay</button>
+          <label>Rows <input type="text" id="reel-rows" value="SPELLING / RESTORED" spellcheck="false" /></label>
+        </div>
+        <ul class="keys">
+          <li>Click or drag a letter to select</li>
+          <li>Type to overwrite, <kbd>Backspace</kbd> to delete</li>
+          <li><kbd>Alt</kbd> + <kbd>↑</kbd> <kbd>↓</kbd> cycle a letter</li>
+          <li><kbd>Alt</kbd> + <kbd>←</kbd> <kbd>→</kbd> rotate the selection</li>
+          <li><kbd>⌘</kbd>/<kbd>Ctrl</kbd> + <kbd>Z</kbd> undo, with <kbd>Shift</kbd> redo</li>
+          <li>Double-click empty space to replay</li>
+        </ul>
+        <div data-snippets="reelTitle"></div>
+      </section>
+
+      <section class="section" id="glitch">
+        <div class="eyebrow">03 · Glitch kit</div>
+        <h2>CSS glitch effects</h2>
+        <p class="credit">After Matt Deloughry's <a href="https://deloughry.co.uk/field-notes/building-glitch-effects-with-css/">Building Glitch Effects with Pure CSS</a>.</p>
+        <p class="lead">Scan lines, chromatic aberration, a text glitch, an oscilloscope and corruption blocks. CSS only: add a class.</p>
+        <div class="grid">
+          <div class="tile">
+            <h3>CRT scan lines</h3>
+            <div class="uifx-crt"><img src="./shared/art.svg" alt="Sunset over the sea" /></div>
+            <p><code>.uifx-crt</code> on a wrapper</p>
+          </div>
+          <div class="tile">
+            <h3>CRT image glitch</h3>
+            <img class="uifx-crt-image" src="./shared/art.svg" alt="" />
+            <p><code>.uifx-crt-image</code></p>
+          </div>
+          <div class="tile">
+            <h3>Chromatic shadow</h3>
+            <img class="uifx-chroma" src="./shared/art.svg" alt="" />
+            <p><code>.uifx-chroma</code></p>
+          </div>
+          <div class="tile">
+            <h3>Chromatic jitter</h3>
+            <img class="uifx-chroma-jitter" src="./shared/art.svg" alt="" />
+            <p><code>.uifx-chroma-jitter</code></p>
+          </div>
+          <div class="tile">
+            <h3>Chromatic layers</h3>
+            <span class="uifx-chroma-layers">
+              <img src="./shared/art.svg" alt="" />
+              <img class="uifx-chroma-red" src="./shared/art.svg" alt="" aria-hidden="true" />
+              <img class="uifx-chroma-cyan" src="./shared/art.svg" alt="" aria-hidden="true" />
+            </span>
+            <p><code>.uifx-chroma-layers</code></p>
+          </div>
+          <div class="tile">
+            <h3>Oscilloscope</h3>
+            <div class="scope-box"><div class="uifx-scope" id="scope"></div></div>
+            <p><code>.uifx-scope</code> and <code>.uifx-glitch-block</code></p>
+          </div>
+          <div class="tile tile-wide">
+            <h3>Text glitch</h3>
+            <span class="uifx-glitch-text glitch-title">SIGNAL LOST</span>
+            <p><code>.uifx-glitch-text</code></p>
+          </div>
+          <div class="tile tile-wide">
+            <h3>Glitch card (hover it)</h3>
+            <div class="now-playing uifx-glitch-card">
+              <img src="./shared/art.svg" alt="" />
+              <div class="np-meta"><strong>Low Tide</strong>Now playing</div>
+              <div class="scope-box"><div class="uifx-scope" id="np-scope"></div></div>
+            </div>
+            <p><code>.uifx-glitch-card</code></p>
+          </div>
+        </div>
+        <div data-snippets="glitch"></div>
+      </section>
+
+      <section class="section" id="theme-wave">
+        <div class="eyebrow">04 · Theme wave</div>
+        <h2>Wave theme transition</h2>
+        <p class="credit">After Stuart Langridge's <a href="https://www.kryogenix.org/code/browser/theme-transition.html">View transitions for changing themes</a>.</p>
+        <p class="lead">The new theme comes in behind a cosine wave. A same-document view transition, so the page keeps its scroll position. Without the API, or with reduced motion, the theme changes at once.</p>
+        <div class="stage">
+          <div class="wave-demo">
+            <button class="button" type="button" data-theme-set="light">Light</button>
+            <button class="button" type="button" data-theme-set="dark">Dark</button>
+            <button class="button primary" type="button" id="wave-toggle">Toggle</button>
+          </div>
+          <div class="controls">
+            <label>Humps <input type="range" id="wave-humps" min="0.5" max="5" step="0.5" value="1.5" /><output for="wave-humps">1.5</output></label>
+            <label>Duration <input type="range" id="wave-duration" min="0.5" max="4" step="0.25" value="1.5" /><output for="wave-duration">1.5s</output></label>
+            <label>Amplitude <input type="range" id="wave-amplitude" min="0" max="30" step="1" value="10" /><output for="wave-amplitude">10%</output></label>
+          </div>
+        </div>
+        <div data-snippets="themeWave"></div>
+      </section>
+
+      <section class="section" id="pull-cord">
+        <div class="eyebrow">05 · Pull-cord</div>
+        <h2>Ceiling pull-cord</h2>
+        <p class="credit">
+          Port of <a href="https://github.com/mortspace/pullcord">mortspace/pullcord</a> (MIT), as used on
+          <a href="https://www.physiohub.io/blog/tripod-sign">physiohub.io</a>.
+        </p>
+        <p class="lead">
+          The cord at the top right is a Verlet rope. Grab the knob and pull: it clicks mid-pull, like a real pull-chain, and switches the theme with the wave. Click
+          it or press <kbd>Enter</kbd> for a short yank. The loop sleeps when the rope is still.
+        </p>
+        <div data-snippets="pullCord"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="credits">
+      <h2 class="eyebrow">Credits</h2>
+      <ul>
+        <li>Theme wave: Stuart Langridge, <a href="https://www.kryogenix.org/code/browser/theme-transition.html">kryogenix.org</a>.</li>
+        <li>Glitch kit: Matt Deloughry, <a href="https://deloughry.co.uk/field-notes/building-glitch-effects-with-css/">deloughry.co.uk</a>.</li>
+        <li>Reel title: Kit Langton, <a href="https://anoma.ly/notes/opencode-reloaded">anoma.ly</a>.</li>
+        <li>Pixel field: the hero of <a href="https://omarchy.org/">omarchy.org</a>. The entrance effects are new; the originals use terminal text effects.</li>
+        <li>Pull-cord: <a href="https://github.com/mortspace/pullcord">mortspace/pullcord</a>, MIT licence.</li>
+        <li>Font: <a href="https://commitmono.com/">Commit Mono</a>, SIL Open Font License 1.1.</li>
+      </ul>
+      <p>These are ports for study and reuse. The code is rewritten; the ideas and the look belong to the people above.</p>
+    </footer>
+  </body>
+</html>

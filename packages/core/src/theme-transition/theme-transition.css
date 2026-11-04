@@ -1,0 +1,82 @@
+/*
+ * Wave theme transition.
+ * Port of Stuart Langridge's "View transitions for changing themes"
+ * (https://www.kryogenix.org/code/browser/theme-transition.html).
+ * The original navigates the page to itself (cross-document view transition).
+ * This port runs a same-document transition (see theme-transition.js), so the
+ * scroll position stays and no reload happens. The wave is the same: the new
+ * theme comes in behind a cosine edge that moves from top to bottom.
+ */
+
+:root {
+  --uifx-wave-duration: 1.5s;
+  /* Number of humps from left to right. */
+  --uifx-wave-humps: 1.5;
+  /* Height of a hump. */
+  --uifx-wave-amplitude: 10%;
+}
+
+/* A custom property animates only when it is registered. */
+@property --uifx-wave-time {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: true;
+}
+
+@keyframes uifx-wave-hold {
+  from {
+  }
+  to {
+  }
+}
+
+/* Start a bit above the screen and end a bit below it. */
+@keyframes uifx-wave-in {
+  from {
+    --uifx-wave-time: -0.1;
+  }
+  to {
+    --uifx-wave-time: 1.1;
+  }
+}
+
+:root.uifx-theme-wave::view-transition-group(root) {
+  animation-duration: var(--uifx-wave-duration);
+}
+
+/* Without an animation of its own, the old view gets the default fade. */
+:root.uifx-theme-wave::view-transition-old(root) {
+  animation: var(--uifx-wave-duration) ease-in both uifx-wave-hold;
+}
+
+:root.uifx-theme-wave::view-transition-new(root) {
+  --uifx-wave-lr: calc(var(--uifx-wave-humps) * pi);
+  --uifx-wave-time: 0;
+  mix-blend-mode: normal;
+  clip-path: polygon(
+    0% 0%,
+    0% calc(cos((0 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    5% calc(cos((0.05 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    10% calc(cos((0.1 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    15% calc(cos((0.15 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    20% calc(cos((0.2 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    25% calc(cos((0.25 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    30% calc(cos((0.3 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    35% calc(cos((0.35 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    40% calc(cos((0.4 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    45% calc(cos((0.45 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    50% calc(cos((0.5 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    55% calc(cos((0.55 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    60% calc(cos((0.6 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    65% calc(cos((0.65 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    70% calc(cos((0.7 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    75% calc(cos((0.75 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    80% calc(cos((0.8 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    85% calc(cos((0.85 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    90% calc(cos((0.9 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    95% calc(cos((0.95 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    100% calc(cos((1 + var(--uifx-wave-time)) * var(--uifx-wave-lr)) * var(--uifx-wave-amplitude) + 100% * var(--uifx-wave-time)),
+    100% 0%
+  );
+  animation: var(--uifx-wave-duration) ease-in both uifx-wave-in;
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@uifx/vue",
+  "version": "0.1.0",
+  "description": "Vue 3 components for @uifx/core.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
+  "dependencies": {
+    "@uifx/core": "0.1.0"
+  },
+  "peerDependencies": {
+    "vue": ">=3.3"
+  }
+}

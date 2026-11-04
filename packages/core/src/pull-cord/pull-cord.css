@@ -1,0 +1,112 @@
+/* Pull-cord. Port of mortspace/pullcord (MIT). Geometry and physics live in pull-cord.js.
+   Position and colour with:
+     --uifx-cord-top    anchor offset from the top (default 0px)
+     --uifx-cord-right  distance from the right edge (default 7rem)
+     --uifx-cord-z      z-index (default 5; a higher sticky header hides the anchor)
+     --uifx-cord-ink    rope colour
+     --uifx-cord-doodle hint and focus ring colour */
+
+:root {
+  --uifx-cord-ink: rgba(20, 20, 20, 0.22);
+  --uifx-cord-doodle: #81818b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --uifx-cord-ink: rgba(255, 255, 255, 0.24);
+    --uifx-cord-doodle: #8a857a;
+  }
+}
+
+:root[data-theme="dark"] {
+  --uifx-cord-ink: rgba(255, 255, 255, 0.24);
+  --uifx-cord-doodle: #8a857a;
+}
+
+.uifx-pull-cord {
+  position: fixed;
+  top: var(--uifx-cord-top, 0px);
+  right: var(--uifx-cord-right, 7rem);
+  z-index: var(--uifx-cord-z, 5);
+  width: 64px;
+  height: 340px;
+  pointer-events: none;
+}
+
+/* The drop-in transform sits on the inner element, so the outer one keeps a plain z-index. */
+.uifx-pull-cord-inner {
+  position: absolute;
+  inset: 0;
+}
+
+.uifx-pull-cord-inner svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Accelerates and ends fast, so the fall hands its speed to the rope with no seam. */
+.uifx-pull-cord-inner.is-dropping {
+  animation: uifx-cord-drop 0.6s 0.4s cubic-bezier(0.45, 0, 0.9, 0.5) both;
+}
+
+@keyframes uifx-cord-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-230px);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.uifx-pull-cord-rope {
+  stroke: var(--uifx-cord-ink);
+}
+
+.uifx-pull-cord-knob {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.uifx-pull-cord-knob:active {
+  cursor: grabbing;
+}
+
+.uifx-pull-cord-knob:focus-visible {
+  outline: 2px solid var(--uifx-cord-doodle);
+  outline-offset: -9px;
+}
+
+.uifx-pull-cord-hint {
+  position: absolute;
+  top: 166px;
+  right: 50px;
+  white-space: pre;
+  text-align: right;
+  color: var(--uifx-cord-doodle);
+  font: 600 20px / 0.95 "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive;
+  rotate: -4deg;
+  pointer-events: none;
+}
+
+@media (max-width: 1080px) {
+  .uifx-pull-cord-hint {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uifx-pull-cord-inner.is-dropping {
+    animation: none;
+  }
+}

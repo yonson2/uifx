@@ -1,0 +1,339 @@
+/*
+ * Glitch kit: CRT scan lines, chromatic aberration, text glitch,
+ * oscilloscope waveform and corruption blocks.
+ * Port of Matt Deloughry's "Building Glitch Effects with Pure CSS"
+ * (https://deloughry.co.uk/field-notes/building-glitch-effects-with-css/).
+ * Class names have the uifx- prefix. The values are the article's.
+ */
+
+:root {
+  --uifx-glitch-red: #ff4757;
+  --uifx-glitch-cyan: #00d9ff;
+  --uifx-glitch-pink: #ff6b9d;
+  --uifx-glitch-green: #00ff87;
+  --uifx-glitch-yellow: #fffa65;
+}
+
+/* CRT scan lines: wrap any element (pseudo-elements do not work on <img>). */
+.uifx-crt {
+  position: relative;
+  overflow: hidden;
+}
+
+.uifx-crt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.25) 2px,
+    rgba(0, 0, 0, 0.25) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+  animation: uifx-crt-scanline-flicker 0.08s steps(2) infinite;
+}
+
+@keyframes uifx-crt-scanline-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.92;
+  }
+}
+
+/* CRT on an image without a wrapper: colour fringe and a short glitch every 4 s. */
+.uifx-crt-image {
+  animation: uifx-crt-image-glitch 4s steps(1) infinite;
+  box-shadow:
+    3px 0 0 rgba(255, 71, 87, 0.3),
+    -3px 0 0 rgba(0, 217, 255, 0.3);
+}
+
+@keyframes uifx-crt-image-glitch {
+  0%,
+  90%,
+  100% {
+    filter: none;
+    transform: translate(0);
+  }
+  91% {
+    filter: hue-rotate(45deg) saturate(1.5);
+    transform: translate(-2px);
+  }
+  92% {
+    filter: hue-rotate(-45deg) brightness(1.2);
+    transform: translate(3px);
+  }
+  93% {
+    filter: saturate(2) contrast(1.1);
+    transform: translate(-1px) skew(1deg);
+  }
+  94% {
+    filter: hue-rotate(90deg);
+    transform: translate(2px);
+  }
+  95% {
+    filter: none;
+    transform: translate(0);
+  }
+}
+
+/* Chromatic aberration, method 1: box shadow. */
+.uifx-chroma {
+  box-shadow:
+    2px 0 0 rgba(255, 71, 87, 0.2),
+    -2px 0 0 rgba(0, 217, 255, 0.2);
+}
+
+/* Method 2: animated jitter. */
+.uifx-chroma-jitter {
+  animation: uifx-chromatic-jitter 0.3s steps(2) infinite;
+}
+
+@keyframes uifx-chromatic-jitter {
+  0%,
+  100% {
+    box-shadow:
+      3px 0 0 rgba(255, 71, 87, 0.3),
+      -3px 0 0 rgba(0, 217, 255, 0.3);
+  }
+  50% {
+    box-shadow:
+      4px 1px 0 rgba(255, 71, 87, 0.4),
+      -4px -1px 0 rgba(0, 217, 255, 0.4);
+  }
+}
+
+/* Method 3: layered copies of the same image. */
+.uifx-chroma-layers {
+  position: relative;
+  display: inline-block;
+}
+
+.uifx-chroma-layers > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.uifx-chroma-layers > .uifx-chroma-red,
+.uifx-chroma-layers > .uifx-chroma-cyan {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.uifx-chroma-red {
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+  animation: uifx-chromatic-red 0.12s steps(2) infinite;
+}
+
+.uifx-chroma-cyan {
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  animation: uifx-chromatic-cyan 0.15s steps(2) infinite;
+}
+
+@keyframes uifx-chromatic-red {
+  0%,
+  100% {
+    transform: translate(2px, 1px);
+  }
+  50% {
+    transform: translate(3px, 0);
+  }
+}
+
+@keyframes uifx-chromatic-cyan {
+  0%,
+  100% {
+    transform: translate(-2px, -1px);
+  }
+  50% {
+    transform: translate(-3px, 1px);
+  }
+}
+
+/* Text glitch: a short burst in 8 % of a 6 s cycle. */
+.uifx-glitch-text {
+  display: inline-block;
+  animation: uifx-text-glitch 6s ease-in-out infinite;
+}
+
+@keyframes uifx-text-glitch {
+  0%,
+  92%,
+  100% {
+    transform: translateX(0);
+    text-shadow: none;
+  }
+  93% {
+    transform: translateX(-2px);
+    text-shadow:
+      2px 0 var(--uifx-glitch-cyan),
+      -2px 0 var(--uifx-glitch-red);
+  }
+  94% {
+    transform: translateX(2px);
+    text-shadow:
+      -2px 0 var(--uifx-glitch-cyan),
+      2px 0 var(--uifx-glitch-red);
+  }
+  95% {
+    transform: translateX(-1px);
+    text-shadow:
+      1px 0 var(--uifx-glitch-cyan),
+      -1px 0 var(--uifx-glitch-red);
+  }
+  96% {
+    transform: translateX(1px);
+    text-shadow: none;
+  }
+}
+
+/* Oscilloscope: an SVG path whose d attribute morphs (viewBox 0 0 200 40).
+   The article shows its paths cut short, with T commands. T reflects the last control
+   point, so the curve grows out of the box when end points leave the centre line.
+   These paths use Q with explicit control points and keep the article's look. */
+.uifx-scope {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.uifx-scope > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.uifx-scope-path {
+  fill: none;
+  stroke: var(--uifx-scope-color, var(--uifx-glitch-green));
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px var(--uifx-scope-color, var(--uifx-glitch-green)));
+  animation: uifx-wave-morph 0.8s ease-in-out infinite;
+}
+
+@keyframes uifx-wave-morph {
+  0%,
+  100% {
+    d: path("M0,20 Q10,5 20,20 Q30,35 40,20 Q50,5 60,20 Q70,35 80,20 Q90,5 100,20 Q110,35 120,20 Q130,5 140,20 Q150,35 160,20 Q170,5 180,20 Q190,35 200,20");
+  }
+  25% {
+    d: path("M0,20 Q10,10 20,20 Q30,32 40,20 Q50,14 60,20 Q70,26 80,20 Q90,6 100,20 Q110,30 120,20 Q130,12 140,20 Q150,36 160,20 Q170,16 180,20 Q190,28 200,20");
+  }
+  50% {
+    d: path("M0,20 Q10,16 20,20 Q30,38 40,20 Q50,4 60,20 Q70,24 80,20 Q90,12 100,20 Q110,34 120,20 Q130,8 140,20 Q150,26 160,20 Q170,2 180,20 Q190,30 200,20");
+  }
+  75% {
+    d: path("M0,20 Q10,6 20,20 Q30,28 40,20 Q50,12 60,20 Q70,36 80,20 Q90,18 100,20 Q110,22 120,20 Q130,4 140,20 Q150,32 160,20 Q170,14 180,20 Q190,38 200,20");
+  }
+}
+
+/* Corruption blocks: flash in 5 % of a 4 s cycle; place them with inline styles. */
+.uifx-glitch-block {
+  position: absolute;
+  opacity: 0;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  animation: uifx-glitch-block 4s steps(1) infinite;
+}
+
+@keyframes uifx-glitch-block {
+  0%,
+  92%,
+  100% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  93% {
+    opacity: 0.8;
+    transform: translateX(-5px);
+    background: var(--uifx-glitch-cyan);
+  }
+  95% {
+    opacity: 0.6;
+    transform: translateX(3px);
+    background: var(--uifx-glitch-red);
+  }
+  97% {
+    opacity: 0.9;
+    transform: translateX(-2px);
+    background: var(--uifx-glitch-green);
+  }
+}
+
+/* The article's "Now Playing" card: gray art that glitches into colour on hover. */
+.uifx-glitch-card {
+  border: 2px solid rgba(127, 127, 127, 0.25);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    border-color 0.15s;
+}
+
+.uifx-glitch-card:hover {
+  border-color: var(--uifx-glitch-green);
+  transform: translate(-2px, -2px);
+  box-shadow: 2px 2px 0 var(--uifx-glitch-green);
+}
+
+.uifx-glitch-card img {
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
+.uifx-glitch-card:hover img {
+  filter: grayscale(0%);
+  animation: uifx-art-glitch 3s steps(1) infinite;
+}
+
+/* The article names art-glitch but does not show it; this one follows its other keyframes. */
+@keyframes uifx-art-glitch {
+  0%,
+  86%,
+  100% {
+    filter: grayscale(0%);
+    transform: translate(0);
+  }
+  87% {
+    filter: hue-rotate(60deg) saturate(1.6);
+    transform: translate(-3px, 1px);
+  }
+  89% {
+    filter: hue-rotate(-60deg) contrast(1.3);
+    transform: translate(3px, -1px);
+  }
+  91% {
+    filter: invert(0.15) hue-rotate(120deg);
+    transform: translate(-1px);
+  }
+  93% {
+    filter: grayscale(0%);
+    transform: translate(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .uifx-crt::before,
+  .uifx-crt-image,
+  .uifx-chroma-jitter,
+  .uifx-chroma-red,
+  .uifx-chroma-cyan,
+  .uifx-glitch-text,
+  .uifx-scope-path,
+  .uifx-glitch-block,
+  .uifx-glitch-card:hover img {
+    animation: none;
+  }
+}

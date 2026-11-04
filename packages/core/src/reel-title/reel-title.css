@@ -1,0 +1,118 @@
+/* Reel title. See reel-title.js. */
+
+.uifx-reel {
+  --uifx-reel-font: "Commit Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --uifx-reel-weight: 500;
+  --uifx-reel-removal: #d8342a;
+  --uifx-reel-fringe-red: #ff4757;
+  --uifx-reel-fringe-cyan: #00b8e6;
+  position: relative;
+  display: block;
+  color: inherit;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.uifx-reel-scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.uifx-reel-scene text {
+  fill: currentColor;
+  font-family: var(--uifx-reel-font);
+  font-weight: var(--uifx-reel-weight);
+  font-size: 78px;
+}
+
+.uifx-reel-cell {
+  overflow: hidden;
+}
+
+.uifx-reel-cell.is-removing text {
+  fill: var(--uifx-reel-removal);
+}
+
+.uifx-reel-wash {
+  fill: var(--uifx-reel-removal);
+}
+
+.uifx-reel-lens-glass {
+  fill: currentColor;
+}
+
+.uifx-reel-lens-rim {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.uifx-reel-lens-rim.is-removing {
+  stroke: var(--uifx-reel-removal);
+}
+
+.uifx-reel-fringe-red {
+  color: var(--uifx-reel-fringe-red);
+}
+
+.uifx-reel-fringe-cyan {
+  color: var(--uifx-reel-fringe-cyan);
+}
+
+.uifx-reel-fringe-red,
+.uifx-reel-fringe-cyan {
+  mix-blend-mode: multiply;
+  filter: opacity(0.45);
+}
+
+.uifx-reel-hit {
+  fill: transparent;
+  touch-action: none;
+}
+
+.uifx-reel[data-editing] .uifx-reel-hit {
+  cursor: text;
+}
+
+.uifx-reel-input {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  resize: none;
+  font-size: 16px;
+}
+
+.uifx-reel-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  .uifx-reel-fringe-red,
+  .uifx-reel-fringe-cyan {
+    mix-blend-mode: screen;
+  }
+}
+
+:root[data-theme="dark"] .uifx-reel-fringe-red,
+:root[data-theme="dark"] .uifx-reel-fringe-cyan {
+  mix-blend-mode: screen;
+}
+
+:root[data-theme="light"] .uifx-reel-fringe-red,
+:root[data-theme="light"] .uifx-reel-fringe-cyan {
+  mix-blend-mode: multiply;
+}
