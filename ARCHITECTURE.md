@@ -11,23 +11,23 @@
 ├── packages/
 │   ├── core/                    @uifx/core: the effects, framework-free
 │   │   └── src/
-│   │       ├── index.js         public JS API (re-exports)
+│   │       ├── index.js         public JS API (re-exports); index.d.ts: its types
 │   │       ├── index.css        all effect styles (@import of the files below)
 │   │       ├── theme-transition/  theme-transition.{css,js}: wave view transition, theme helpers
 │   │       ├── glitch/          glitch.css (CSS only) + scope.js (oscilloscope markup data)
 │   │       ├── reel-title/      model.js (pure editing model) + reel-title.{js,css} (SVG engine)
 │   │       ├── pixel-field/     pixel-field.{js,css} (canvas engine), effects.js, font.js
 │   │       └── pull-cord/       pull-cord.{js,css} (Verlet rope), LICENSE (MIT, upstream)
-│   ├── react/src/index.js       @uifx/react: createElement wrappers (no JSX, no build)
-│   ├── vue/src/index.js         @uifx/vue: defineComponent + h() wrappers (no SFC, no build)
-│   └── svelte/src/*.svelte      @uifx/svelte: Svelte 5 components (runes)
+│   ├── react/src/index.js       @uifx/react: createElement wrappers (no JSX, no build) + index.d.ts
+│   ├── vue/src/index.js         @uifx/vue: defineComponent + h() wrappers (no SFC, no build) + index.d.ts
+│   └── svelte/src/*.svelte      @uifx/svelte: Svelte 5 components (runes) + index.d.ts
 ├── site/                        demo site, Vite root (multi-page)
 │   ├── index.html, main.js      gallery: plain HTML + @uifx/core, docs and usage tabs
 │   ├── react/                   the same effects through @uifx/react
 │   ├── vue/                     ... through @uifx/vue
 │   ├── svelte/                  ... through @uifx/svelte
 │   └── shared/                  site.css, chrome.js (theme buttons, tabs), snippets.js, art.svg
-├── tests/                       Vitest unit tests of the pure modules
+├── tests/                       Vitest unit tests of the pure modules; types/: tsc check of the .d.ts
 ├── tools/shots.mjs              Playwright screenshots of the built site
 ├── .github/workflows/pages.yml  CI: test, build, deploy to GitHub Pages
 ├── vite.config.js               Vite (site build) + Vitest config
@@ -119,7 +119,7 @@ None.
 
 ## 6. Deployment & Infrastructure
 
-- `.github/workflows/pages.yml`: on push to `main`, `npm ci`, `npm test`, `npm run build`,
+- `.github/workflows/pages.yml`: on push to `main`, `npm ci`, `npm test`, `npm run types`, `npm run build`,
   then upload `site/dist` and deploy with `actions/deploy-pages`. Pull requests run the
   test and build only.
 - `base: "./"` in `vite.config.js` makes every URL relative, so the site works under
@@ -142,6 +142,8 @@ None.
 - `npm run dev`: Vite dev server for the site. `npm run build`: `site/dist`.
 - `npm test`: Vitest over `tests/` (the pure modules: reel model and typos, font, entrance
   effects).
+- `npm run types`: tsc over `tests/types/` (typed use of every package, with
+  `@ts-expect-error` lines for wrong use) and the hand-written `index.d.ts` files.
 - Visual check: `npm run build`, `npx vite preview`, `npm run shots` (light and dark shots
   of all four pages; it fails on a console error).
 

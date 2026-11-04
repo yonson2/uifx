@@ -58,7 +58,7 @@ function glitchFilter(defs, id, region) {
 export class ReelTitle {
   /**
    * @param {HTMLElement} host
-   * @param {{ rows?: string[], editable?: boolean, autoplay?: boolean, typos?: boolean, label?: string }} [options]
+   * @param {{ rows?: string[], editable?: boolean, autoplay?: boolean, typos?: boolean }} [options]
    */
   constructor(host, options = {}) {
     this.host = host;

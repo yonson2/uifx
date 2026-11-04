@@ -21,7 +21,8 @@ The [demo site](https://yonson2.github.io/uifx/) shows every effect, with usage 
 | `@uifx/vue` | Vue 3 components. |
 | `@uifx/svelte` | Svelte 5 components. |
 
-The packages are not on npm yet. They ship plain JavaScript source, with no build step.
+The packages are not on npm yet. They ship plain JavaScript source, with no build step, and
+hand-written TypeScript declarations (`index.d.ts`).
 
 ## Usage
 
@@ -70,6 +71,7 @@ light and dark defaults. Every effect respects `prefers-reduced-motion`.
 npm install
 npm run dev       # demo site at http://localhost:5173/
 npm test          # Vitest: reel title model, pixel field font and effects
+npm run types     # tsc: the .d.ts files against typed use in tests/types/
 npm run build     # site/dist/
 npx vite preview  # serve the build at http://localhost:4173/
 npm run shots     # Playwright screenshots of the build into shots/ (needs the preview)

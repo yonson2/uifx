@@ -8,7 +8,10 @@
     "*.css"
   ],
   "exports": {
-    ".": "./src/index.js",
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
     "./index.css": "./src/index.css",
     "./theme-transition.css": "./src/theme-transition/theme-transition.css",
     "./glitch.css": "./src/glitch/glitch.css",

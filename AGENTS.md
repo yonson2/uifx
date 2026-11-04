@@ -59,7 +59,9 @@ The repo is public.
 
 ## Code standards
 
-- Plain modern JavaScript (ES modules), no TypeScript, no build step for the packages.
+- Plain modern JavaScript (ES modules), no build step for the packages. Types are
+  hand-written `src/index.d.ts` files, one per package (D12): change them with the JS, and
+  add typed use to `tests/types/`.
   React and Vue wrappers use `createElement` and `h()`, so they run without JSX or SFC
   compilers.
 - Class names and custom properties carry the `uifx-` prefix.
@@ -81,6 +83,8 @@ The repo is public.
 - Install: `npm install` (links `packages/*` into `node_modules/@uifx/`)
 - Dev server: `npm run dev` (<http://localhost:5173/>, pages `/`, `/react/`, `/vue/`, `/svelte/`)
 - Tests: `npm test`
+- Types: `npm run types` (tsc over `tests/types/`; a `@ts-expect-error` line that stops
+  failing fails the check)
 - Build: `npm run build` (writes `site/dist/`)
 - Preview the build: `npx vite preview` (<http://localhost:4173/>)
 - Screenshots: `npm run shots [base URL]` with the preview running. It writes
