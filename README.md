@@ -38,7 +38,7 @@ import { PixelField, PullCord, ReelTitle, toggleTheme } from "@uifx/core";
 
 new PixelField(document.querySelector("#hero"), { text: "HELLO" }); // the host holds a [data-pf-wordmark] element
 new ReelTitle(document.querySelector("#title"), { rows: ["SPELLING", "RESTORED"] });
-new PullCord(document.querySelector("#cord")); // a pull calls toggleTheme()
+new PullCord(document.querySelector("#cord")); // a pull toggles the theme with a crossfade
 button.onclick = () => toggleTheme(); // sets data-theme on <html> with the wave
 ```
 
@@ -60,7 +60,8 @@ import { GlitchText, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark } fr
 ```
 
 The theme helpers set `data-theme="light|dark"` on `<html>` and keep it in `localStorage`
-(`uifx-theme`). Each effect reads its colours from CSS custom properties (`--uifx-*`), with
+(`uifx-theme`). They use the wave; pass `{ transition: "fade" }` for the browser's standard
+crossfade, or `"none"`. Each effect reads its colours from CSS custom properties (`--uifx-*`), with
 light and dark defaults. Every effect respects `prefers-reduced-motion`.
 
 ## Development

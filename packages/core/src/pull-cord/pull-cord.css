@@ -4,23 +4,23 @@
      --uifx-cord-right  distance from the right edge (default 7rem)
      --uifx-cord-z      z-index (default 5; a higher sticky header hides the anchor)
      --uifx-cord-ink    rope colour
-     --uifx-cord-doodle hint and focus ring colour */
+     --uifx-cord-focus  focus ring colour */
 
 :root {
   --uifx-cord-ink: rgba(20, 20, 20, 0.22);
-  --uifx-cord-doodle: #81818b;
+  --uifx-cord-focus: #81818b;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --uifx-cord-ink: rgba(255, 255, 255, 0.24);
-    --uifx-cord-doodle: #8a857a;
+    --uifx-cord-focus: #8a857a;
   }
 }
 
 :root[data-theme="dark"] {
   --uifx-cord-ink: rgba(255, 255, 255, 0.24);
-  --uifx-cord-doodle: #8a857a;
+  --uifx-cord-focus: #8a857a;
 }
 
 .uifx-pull-cord {
@@ -83,26 +83,8 @@
 }
 
 .uifx-pull-cord-knob:focus-visible {
-  outline: 2px solid var(--uifx-cord-doodle);
+  outline: 2px solid var(--uifx-cord-focus);
   outline-offset: -9px;
-}
-
-.uifx-pull-cord-hint {
-  position: absolute;
-  top: 166px;
-  right: 50px;
-  white-space: pre;
-  text-align: right;
-  color: var(--uifx-cord-doodle);
-  font: 600 20px / 0.95 "Segoe Script", "Bradley Hand", "Comic Sans MS", cursive;
-  rotate: -4deg;
-  pointer-events: none;
-}
-
-@media (max-width: 1080px) {
-  .uifx-pull-cord-hint {
-    display: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

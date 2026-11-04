@@ -16,7 +16,7 @@ function App() {
   const [text, setText] = useState(ROWS.join(" / "));
   return (
     <>
-      <PullCord hint={"pull to switch\nthe theme"} />
+      <PullCord />
       <PixelField ref={field} className="hero" text="REACT" aria-label="Pixel field demo">
         <Wordmark />
         <div className="hero-copy" data-pf-quiet>
@@ -87,7 +87,7 @@ function App() {
       <section className="section">
         <div className="eyebrow">Theme wave and pull-cord</div>
         <h2>&lt;ThemeToggle&gt; &lt;PullCord&gt;</h2>
-        <p className="lead">The button and the cord at the top right both switch the theme with the wave.</p>
+        <p className="lead">The button switches the theme with the wave; the cord at the top right, with a crossfade.</p>
         <ThemeToggle className="button primary">Toggle theme</ThemeToggle>
       </section>
     </>

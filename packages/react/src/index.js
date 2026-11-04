@@ -101,18 +101,18 @@ export function PixelField({ ref, as = "section", text = "PIXELS", bitmap, scale
   return h(as, { ref: host, className: cx("uifx-pixel-field", className), ...rest }, children);
 }
 
-/** The ceiling pull-cord. A pull toggles the theme, or calls onPull when given. */
-export function PullCord({ onPull, label = "Toggle theme", pressed = null, entrance = true, hint = "", config, className, ...rest }) {
+/** The ceiling pull-cord. A pull toggles the theme with a crossfade, or calls onPull when given. */
+export function PullCord({ onPull, label = "Toggle theme", pressed = null, entrance = true, config, className, ...rest }) {
   const host = useRef(null);
   const engine = useRef(null);
   const pull = useRef(onPull);
   pull.current = onPull;
   const hasPull = Boolean(onPull);
   useEffect(() => {
-    const instance = new PullCordEngine(host.current, { label, pressed, config, entrance, hint, ...(hasPull && { onPull: () => pull.current?.() }) });
+    const instance = new PullCordEngine(host.current, { label, pressed, config, entrance, ...(hasPull && { onPull: () => pull.current?.() }) });
     engine.current = instance;
     return () => instance.destroy();
-  }, [hasPull, entrance, hint]);
+  }, [hasPull, entrance]);
   useEffect(() => engine.current?.setLabel(label), [label]);
   useEffect(() => engine.current?.setPressed(pressed), [pressed]);
   useEffect(() => engine.current?.setConfig({ ...CORD_CONFIG, ...config }));

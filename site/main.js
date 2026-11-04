@@ -5,7 +5,7 @@ import { CHARSET, EFFECT_NAMES, PixelField, PullCord, ReelTitle, SCOPE_BLOCKS, S
 import { setupChrome } from "./shared/chrome.js";
 
 setupChrome();
-new PullCord(document.getElementById("cord"), { hint: "pull to switch\nthe theme" });
+new PullCord(document.getElementById("cord"));
 
 // Pixel field: the hero, its effect buttons and its text.
 const hero = document.getElementById("hero");

@@ -135,14 +135,13 @@ export const PixelField = defineComponent({
   },
 });
 
-/** The ceiling pull-cord. A pull toggles the theme, or calls the @pull listener when given. */
+/** The ceiling pull-cord. A pull toggles the theme with a crossfade, or calls the @pull listener when given. */
 export const PullCord = defineComponent({
   name: "PullCord",
   props: {
     label: { type: String, default: "Toggle theme" },
     pressed: { type: Boolean, default: null },
     entrance: { type: Boolean, default: true },
-    hint: { type: String, default: "" },
     config: { type: Object, default: null },
     // Declared as a prop so the component knows whether a @pull listener exists.
     onPull: { type: Function, default: null },
@@ -152,11 +151,11 @@ export const PullCord = defineComponent({
     let engine = null;
     const mount = () => {
       engine?.destroy();
-      const { label, pressed, config, entrance, hint } = props;
-      engine = new PullCordEngine(host.value, { label, pressed, config, entrance, hint, ...(props.onPull && { onPull: () => props.onPull() }) });
+      const { label, pressed, config, entrance } = props;
+      engine = new PullCordEngine(host.value, { label, pressed, config, entrance, ...(props.onPull && { onPull: () => props.onPull() }) });
     };
     onMounted(mount);
-    watch(() => [Boolean(props.onPull), props.entrance, props.hint], mount);
+    watch(() => [Boolean(props.onPull), props.entrance], mount);
     watch(() => props.label, (label) => engine?.setLabel(label));
     watch(() => props.pressed, (pressed) => engine?.setPressed(pressed));
     watch(() => props.config, (config) => engine?.setConfig({ ...CORD_CONFIG, ...config }), { deep: true });

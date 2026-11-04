@@ -9,7 +9,7 @@
   let text = $state(rows.join(" / "));
 </script>
 
-<PullCord hint={"pull to switch\nthe theme"} />
+<PullCord />
 <PixelField bind:this={field} class="hero" text="SVELTE" aria-label="Pixel field demo">
   <Wordmark />
   <div class="hero-copy" data-pf-quiet>
@@ -70,6 +70,6 @@
 <section class="section">
   <div class="eyebrow">Theme wave and pull-cord</div>
   <h2>&lt;ThemeToggle&gt; &lt;PullCord&gt;</h2>
-  <p class="lead">The button and the cord at the top right both switch the theme with the wave.</p>
+  <p class="lead">The button switches the theme with the wave; the cord at the top right, with a crossfade.</p>
   <ThemeToggle class="button primary">Toggle theme</ThemeToggle>
 </section>

@@ -108,7 +108,8 @@ const field = ref(null); // field.value.play("burn")
 
   restoreTheme(); // early, before the first paint
   document.getElementById("toggle").onclick = () => toggleTheme();
-  // setTheme("dark"), or wrap your own change: transitionTheme(() => body.classList.toggle("dim"))
+  // setTheme("dark"); setTheme("dark", { transition: "fade" }) crossfades, "none" switches at once.
+  // Or wrap your own change: transitionTheme(() => body.classList.toggle("dim"))
 </script>
 
 <style>
@@ -129,8 +130,8 @@ const field = ref(null); // field.value.play("burn")
   import { PullCord } from "@uifx/core";
   ${css}
 
-  // A pull toggles the theme with the wave. Pass onPull to do something else.
-  new PullCord(document.getElementById("cord"), { label: "Toggle theme", hint: "pull me" });
+  // A pull toggles the theme with a crossfade. Pass onPull to do something else.
+  new PullCord(document.getElementById("cord"), { label: "Toggle theme" });
 </script>
 
 <style>

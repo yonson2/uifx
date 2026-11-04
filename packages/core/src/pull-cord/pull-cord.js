@@ -1,5 +1,5 @@
 // A ceiling pull-cord: a Verlet rope that hangs under gravity, swings when you
-// grab it, settles, and fires onPull (by default: toggle the theme with the wave).
+// grab it, settles, and fires onPull (by default: toggle the theme with a crossfade).
 // Port of mortspace/pullcord (MIT, https://github.com/mortspace/pullcord) without React or motion.
 
 import { toggleTheme } from "../theme-transition/theme-transition.js";
@@ -41,11 +41,11 @@ function ropePath(p) {
 export class PullCord {
   /**
    * @param {HTMLElement} host becomes the fixed cord wrapper (position it with --uifx-cord-top / --uifx-cord-right)
-   * @param {{onPull?: () => void, label?: string, pressed?: boolean|null, entrance?: boolean, hint?: string, config?: object}} options
+   * @param {{onPull?: () => void, label?: string, pressed?: boolean|null, entrance?: boolean, config?: object}} options
    */
   constructor(host, options = {}) {
     this.host = host;
-    this.options = { onPull: () => toggleTheme(), label: "Toggle theme", pressed: null, entrance: true, hint: "", ...options };
+    this.options = { onPull: () => toggleTheme({ transition: "fade" }), label: "Toggle theme", pressed: null, entrance: true, ...options };
     this.config = { ...CORD_CONFIG, ...options.config };
     this.reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     this.nodes = makeNodes();
@@ -86,13 +86,6 @@ export class PullCord {
     this.setLabel(this.options.label);
     this.setPressed(this.options.pressed);
     this.inner.append(this.knob);
-    if (this.options.hint) {
-      const hint = document.createElement("span");
-      hint.className = "uifx-pull-cord-hint";
-      hint.setAttribute("aria-hidden", "true");
-      hint.textContent = this.options.hint;
-      this.inner.append(hint);
-    }
     this.host.append(this.inner);
 
     this.onDown = this.onDown.bind(this);

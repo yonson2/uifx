@@ -64,7 +64,9 @@ options, builds its DOM inside the host, and has `destroy()`.
   `uifx-theme-wave` on `<html>` and runs `update` in `document.startViewTransition`. The CSS
   clips `::view-transition-new(root)` with a 21-point polygon on a cosine wave, driven by
   the registered property `--uifx-wave-time`. `setTheme`, `toggleTheme`, `currentTheme`,
-  `restoreTheme` keep `data-theme` on `<html>` and in `localStorage`. Without the API, or
+  `restoreTheme` keep `data-theme` on `<html>` and in `localStorage`; their `transition`
+  option is `"wave"` (default), `"fade"` (no wave class: the standard crossfade) or
+  `"none"`. Only the newest transition removes the wave class. Without the API, or
   with reduced motion, `update` runs at once.
 - **Glitch kit** (`glitch/`). CSS only. `scope.js` exports the oscilloscope path and the
   corruption block positions, so every wrapper renders the same markup.
@@ -86,7 +88,8 @@ options, builds its DOM inside the host, and has `destroy()`.
 - **Pull-cord** (`pull-cord/`). A fixed element with an SVG rope of 16 Verlet segments.
   Dragging pins the last node to the pointer (clamped to `stretchMax`); crossing
   `stretchToggle` fires `onPull` once per pull. Click and Enter give a scripted yank. The
-  rAF loop sleeps when the rope is still. The default `onPull` is `toggleTheme()`.
+  rAF loop sleeps when the rope is still. The default `onPull` is
+  `toggleTheme({ transition: "fade" })`: the browser's standard view-transition crossfade.
 
 **Wrappers** keep no logic. React and Vue are plain JS (`createElement`, `h()`), so the
 packages need no build. Each component creates the engine on mount, recreates it when a
@@ -128,7 +131,7 @@ None.
 
 - No secrets, no server, no user data beyond the theme choice.
 - Engines build DOM with `createElement`/`textContent`, or `innerHTML` from constant
-  templates only; user text (titles, hints) never goes into `innerHTML`.
+  templates only; user text (titles, labels) never goes into `innerHTML`.
 - Third-party code: the pull-cord is MIT (notice kept). The other effects are rewritten
   from public pages and ship as credited rewrites, with no code copied (D10).
 
