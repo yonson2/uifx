@@ -10,7 +10,7 @@ Cool web effects, ported from the sites that made them, for plain HTML, React, V
 | Pixel field | [omarchy.org](https://omarchy.org/) hero | Dithered pixel noise, a pointer glow, ripple stamps and entrance effects on a pixel wordmark. |
 | Pull-cord | [mortspace/pullcord](https://github.com/mortspace/pullcord) (MIT), as on [physiohub.io](https://www.physiohub.io/blog/tripod-sign) | A Verlet rope that toggles the theme when you pull it. |
 
-The demo site (GitHub Pages) shows every effect, with usage per framework.
+The [demo site](https://yonson2.github.io/uifx/) shows every effect, with usage per framework.
 
 ## Packages
 

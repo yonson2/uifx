@@ -151,7 +151,8 @@ cross-document variant of the wave.
 
 - Name: uifx
 - Licence: MIT (`LICENSE`)
-- Repository: not created yet (the owner pushes it)
+- Repository: https://github.com/yonson2/uifx
+- Demo: https://yonson2.github.io/uifx/
 - Contact: the repository owner
 - Last updated: 2026-11-04
 
