@@ -61,10 +61,12 @@
   color: var(--uifx-reel-fringe-cyan);
 }
 
+/* fill-opacity inherits into the <use> copies. WebKit ignores CSS filter on SVG elements,
+   and the opacity attribute is the lens fade. */
 .uifx-reel-fringe-red,
 .uifx-reel-fringe-cyan {
   mix-blend-mode: multiply;
-  filter: opacity(0.45);
+  fill-opacity: 0.45;
 }
 
 .uifx-reel-hit {
