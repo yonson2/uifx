@@ -14,14 +14,13 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Font and fill sit on the root and inherit. The lens shows <use> copies of the letters, and
+   Firefox does not match ".uifx-reel-scene text" inside a <use> copy; inheritance reaches it. */
 .uifx-reel-scene {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
-}
-
-.uifx-reel-scene text {
   fill: currentColor;
   font-family: var(--uifx-reel-font);
   font-weight: var(--uifx-reel-weight);
