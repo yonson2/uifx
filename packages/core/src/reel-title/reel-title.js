@@ -152,6 +152,7 @@ export class ReelTitle {
     root.addEventListener("dblclick", this.onDoubleClick);
     this.input.addEventListener("keydown", this.onKeyDown);
     this.input.addEventListener("input", this.onInput);
+    this.input.addEventListener("compositionend", this.onInput);
     this.input.addEventListener("blur", this.onBlur);
   }
 
@@ -706,7 +707,9 @@ export class ReelTitle {
     if (this.model.selection) this.commit({ ...this.model, selection: null }, { record: false });
   }
 
-  onInput() {
+  // An IME fills the field while it composes; take the text once, on compositionend.
+  onInput(event) {
+    if (event.isComposing) return;
     const text = this.input.value.replace(/[\r\n]/g, "");
     this.input.value = "";
     if (text) this.commit(typeText(this.model, text));
