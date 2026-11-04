@@ -6,7 +6,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const base = process.argv[2] ?? "http://localhost:4173/";
-const pages = { html: "", react: "react/", vue: "vue/", svelte: "svelte/" };
+const pages = { html: "", react: "react/", vue: "vue/", svelte: "svelte/", mpa: "mpa/", "mpa-other": "mpa/other.html" };
 mkdirSync("shots", { recursive: true });
 
 const browser = await chromium.launch();

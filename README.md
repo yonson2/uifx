@@ -65,6 +65,20 @@ The theme helpers set `data-theme="light|dark"` on `<html>` and keep it in `loca
 crossfade, or `"none"`. Each effect reads its colours from CSS custom properties (`--uifx-*`), with
 light and dark defaults. Every effect respects `prefers-reduced-motion`.
 
+Multi-page sites can run the wave across a page load, as in the original
+([demo](https://yonson2.github.io/uifx/mpa/)). Call `crossDocumentTheme()` on every page and
+put this rule inline in each `<head>` (Chromium can miss it in an external stylesheet):
+
+```html
+<style>
+  @view-transition { navigation: auto; types: uifx-theme-wave; }
+</style>
+```
+
+`navigateTheme("dark", { url })` stores the theme and loads the page (default: this page).
+When the next page gets another theme, the wave plays; other navigations get no
+transition. Browsers without cross-document view transitions (Firefox) switch at once.
+
 ## Development
 
 ```sh

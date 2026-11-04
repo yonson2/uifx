@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>uifx: wave across pages, one</title>
+    <meta name="description" content="The theme wave as a cross-document view transition, on two plain pages." />
+    <script>
+      try {
+        const theme = localStorage.getItem("uifx-theme");
+        if (theme) document.documentElement.setAttribute("data-theme", theme);
+      } catch {}
+    </script>
+    <style>
+      @view-transition {
+        navigation: auto;
+        types: uifx-theme-wave;
+      }
+    </style>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../">uifx</a>
+      <nav class="site-nav" aria-label="Pages">
+        <a href="./" aria-current="page">Page one</a>
+        <a href="./other.html">Page two</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="eyebrow">Theme wave · page one</div>
+        <h2>The wave across page loads</h2>
+        <p class="credit">After Stuart Langridge's <a href="https://www.kryogenix.org/code/browser/theme-transition.html">View transitions for changing themes</a>.</p>
+        <p class="lead">
+          Here a theme switch is a page load, as in the original: a cross-document view transition. The Light and Dark links load this page again in that
+          theme, so the scroll position goes back to the top. The last link loads the second page in the other theme. The page links in the header keep the
+          theme and get no transition. Browsers without cross-document view transitions load the page without the wave.
+        </p>
+        <div class="controls">
+          <a class="button" href="./" data-theme-link="light">Light</a>
+          <a class="button" href="./" data-theme-link="dark">Dark</a>
+          <a class="button primary" href="./other.html" data-theme-link>Page two, other theme</a>
+        </div>
+        <div data-snippets="themeWaveMpa"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>The same-document wave, which keeps the scroll position, is on the <a href="../#theme-wave">HTML page</a>.</p>
+    </footer>
+  </body>
+</html>

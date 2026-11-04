@@ -23,6 +23,13 @@ export function setTheme(theme: string, options?: SetThemeOptions): Promise<void
 export function toggleTheme(options?: SetThemeOptions): Promise<void>;
 /** Puts back the remembered theme and returns it. Call it before the first paint. */
 export function restoreTheme(options?: ThemeOptions): string | null;
+/**
+ * The wave across a page load, for multi-page sites. Call it on every page, and put this inline in each <head>:
+ * `<style>@view-transition { navigation: auto; types: uifx-theme-wave; }</style>`
+ */
+export function crossDocumentTheme(options?: ThemeOptions): void;
+/** Remembers the theme and loads `url` (default: this page). */
+export function navigateTheme(theme: string, options?: Pick<ThemeOptions, "storageKey"> & { url?: string | URL }): void;
 
 // Reel title (reel-title/)
 

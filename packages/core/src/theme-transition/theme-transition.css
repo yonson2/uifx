@@ -6,6 +6,8 @@
  * This port runs a same-document transition (see theme-transition.js), so the
  * scroll position stays and no reload happens. The wave is the same: the new
  * theme comes in behind a cosine edge that moves from top to bottom.
+ * The class is for same-document transitions; the type is for the cross-document
+ * variant (crossDocumentTheme). :is() ignores the type where it is unknown.
  */
 
 :root {
@@ -40,16 +42,16 @@
   }
 }
 
-:root.uifx-theme-wave::view-transition-group(root) {
+:root:is(.uifx-theme-wave, :active-view-transition-type(uifx-theme-wave))::view-transition-group(root) {
   animation-duration: var(--uifx-wave-duration);
 }
 
 /* Without an animation of its own, the old view gets the default fade. */
-:root.uifx-theme-wave::view-transition-old(root) {
+:root:is(.uifx-theme-wave, :active-view-transition-type(uifx-theme-wave))::view-transition-old(root) {
   animation: var(--uifx-wave-duration) ease-in both uifx-wave-hold;
 }
 
-:root.uifx-theme-wave::view-transition-new(root) {
+:root:is(.uifx-theme-wave, :active-view-transition-type(uifx-theme-wave))::view-transition-new(root) {
   --uifx-wave-lr: calc(var(--uifx-wave-humps) * pi);
   --uifx-wave-time: 0;
   mix-blend-mode: normal;

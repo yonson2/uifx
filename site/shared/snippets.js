@@ -123,6 +123,25 @@ const field = ref(null); // field.value.play("burn")
     Svelte: `<ThemeToggle>Toggle theme</ThemeToggle>`,
   },
 
+  themeWaveMpa: {
+    HTML: `<!-- On every page. Keep the rule inline: Chromium can miss it in an external stylesheet. -->
+<style>
+  @view-transition { navigation: auto; types: uifx-theme-wave; }
+</style>
+
+<script type="module">
+  import { crossDocumentTheme, navigateTheme, restoreTheme } from "@uifx/core";
+  ${css}
+
+  restoreTheme(); // early, before the first paint
+  crossDocumentTheme(); // the wave when the next page gets another theme; no transition otherwise
+  darkLink.onclick = (event) => {
+    event.preventDefault();
+    navigateTheme("dark", { url: darkLink.href }); // default url: this page
+  };
+</script>`,
+  },
+
   pullCord: {
     HTML: `<div id="cord"></div>
 

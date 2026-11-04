@@ -26,6 +26,7 @@
 │   ├── react/                   the same effects through @uifx/react
 │   ├── vue/                     ... through @uifx/vue
 │   ├── svelte/                  ... through @uifx/svelte
+│   ├── mpa/                     two plain pages: the wave across a page load
 │   └── shared/                  site.css, chrome.js (theme buttons, tabs), snippets.js, art.svg
 ├── tests/                       Vitest unit tests of the pure modules; types/: tsc check of the .d.ts
 ├── tools/shots.mjs              Playwright screenshots of the built site
@@ -68,6 +69,13 @@ options, builds its DOM inside the host, and has `destroy()`.
   option is `"wave"` (default), `"fade"` (no wave class: the standard crossfade) or
   `"none"`. Only the newest transition removes the wave class. Without the API, or
   with reduced motion, `update` runs at once.
+  The cross-document variant uses the same CSS through the view-transition type
+  `uifx-theme-wave` (`:is()` keeps the class rule where the type is unknown). Each page
+  has `@view-transition { navigation: auto; types: uifx-theme-wave; }` inline, because
+  Chromium does not always see the rule in an external stylesheet. `crossDocumentTheme()`
+  listens to `pageswap` on the old page: when the stored theme differs from the shown
+  theme it keeps the transition, else it skips it. The new page needs no script, so the
+  module timing does not matter. `navigateTheme()` stores the theme and loads a URL.
 - **Glitch kit** (`glitch/`). CSS only. `scope.js` exports the oscilloscope path and the
   corruption block positions, so every wrapper renders the same markup.
 - **Reel title** (`reel-title/`). `model.js` is pure: rows of letters with stable ids, a
@@ -97,9 +105,9 @@ structural prop changes (rows, text, bitmap), calls setters for live props (labe
 pressed, config), and destroys it on unmount. `ReelTitle` exposes `replay()`;
 `PixelField` exposes `play(name)`.
 
-**Demo site** (`site/`). Four Vite entry pages. The HTML page has the docs and the usage
-tabs (`shared/snippets.js`); the framework pages render every effect through their
-wrappers. An inline script in each `<head>` restores the theme before the first paint.
+**Demo site** (`site/`). Four Vite entry pages and the two `mpa/` pages. The HTML page
+has the docs and the usage tabs (`shared/snippets.js`); the framework pages render every
+effect through their wrappers. An inline script in each `<head>` restores the theme before the first paint.
 
 ### 3.2 Backend Services
 
@@ -145,12 +153,11 @@ None.
 - `npm run types`: tsc over `tests/types/` (typed use of every package, with
   `@ts-expect-error` lines for wrong use) and the hand-written `index.d.ts` files.
 - Visual check: `npm run build`, `npx vite preview`, `npm run shots` (light and dark shots
-  of all four pages; it fails on a console error).
+  of all demo pages; it fails on a console error).
 
 ## 9. Future Considerations / Roadmap
 
-See `issues/README.md` (local). Open topics: npm publishing, TypeScript types, a
-cross-document variant of the wave.
+See `issues/README.md` (local). Open topic: npm publishing.
 
 ## 10. Project Identification
 

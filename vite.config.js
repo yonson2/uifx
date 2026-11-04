@@ -16,6 +16,8 @@ export default defineConfig({
     react: resolve(root, "react/index.html"),
     vue: resolve(root, "vue/index.html"),
     svelte: resolve(root, "svelte/index.html"),
+    mpa: resolve(root, "mpa/index.html"),
+    mpaOther: resolve(root, "mpa/other.html"),
   },
   build: {
     outDir: resolve(root, "dist"),

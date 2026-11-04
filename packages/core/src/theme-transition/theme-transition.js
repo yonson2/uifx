@@ -60,3 +60,32 @@ export function restoreTheme({ attribute = DEFAULTS.attribute, storageKey = DEFA
   if (theme) document.documentElement.setAttribute(attribute, theme);
   return theme;
 }
+
+/**
+ * The wave across a page load, as in the original, for multi-page sites. Call it on every
+ * page, and put this inline in each <head> (Chromium can miss it in an external stylesheet):
+ *   <style>@view-transition { navigation: auto; types: uifx-theme-wave; }</style>
+ * When the next page gets another theme (stored by navigateTheme or setTheme), the wave
+ * plays. Other navigations get no transition.
+ */
+export function crossDocumentTheme({ attribute = DEFAULTS.attribute, storageKey = DEFAULTS.storageKey } = {}) {
+  addEventListener("pageswap", (event) => {
+    const transition = event.viewTransition;
+    if (!transition) return;
+    let next = null;
+    try {
+      next = localStorage.getItem(storageKey);
+    } catch {}
+    if (next && next !== currentTheme({ attribute }) && !matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    transition.ready.catch(() => {});
+    transition.skipTransition();
+  });
+}
+
+/** Remembers `theme` and loads `url` (default: this page). With crossDocumentTheme, the wave plays there. */
+export function navigateTheme(theme, { storageKey = DEFAULTS.storageKey, url = location.href.split("#")[0] } = {}) {
+  try {
+    localStorage.setItem(storageKey, theme);
+  } catch {}
+  location.assign(url);
+}

@@ -1,7 +1,7 @@
 // Type check of @uifx/core: valid use compiles, each @ts-expect-error line must fail.
 import {
   CORD_CONFIG, EFFECT_NAMES, PixelField, PullCord, ReelTitle, SCOPE_BLOCKS, applyOps, blockStyle,
-  makeTypos, modelText, setTheme, textToBitmap, toggleTheme, transitionTheme, type ReelChangeEvent,
+  crossDocumentTheme, makeTypos, modelText, navigateTheme, setTheme, textToBitmap, toggleTheme, transitionTheme, type ReelChangeEvent,
 } from "@uifx/core";
 
 const host = document.createElement("div");
@@ -28,6 +28,10 @@ setTheme("dark", { transition: "none" });
 // @ts-expect-error unknown transition
 setTheme("dark", { transition: "spin" });
 transitionTheme(() => {}, { wave: false });
+crossDocumentTheme({ attribute: "data-mode", storageKey: "mode" });
+navigateTheme("dark", { url: new URL("other.html", location.href) });
+// @ts-expect-error the URL goes in the options
+navigateTheme("dark", "other.html");
 
 const { model, ops } = makeTypos(["SPELLING"]);
 const rows: string[] = modelText(applyOps(model, ops));

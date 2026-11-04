@@ -1,4 +1,4 @@
-export { transitionTheme, setTheme, toggleTheme, currentTheme, restoreTheme } from "./theme-transition/theme-transition.js";
+export { transitionTheme, setTheme, toggleTheme, currentTheme, restoreTheme, crossDocumentTheme, navigateTheme } from "./theme-transition/theme-transition.js";
 export { ReelTitle } from "./reel-title/reel-title.js";
 export { CHARSET, createModel, makeTypos, applyOps, modelText } from "./reel-title/model.js";
 export { PixelField, RIPPLE } from "./pixel-field/pixel-field.js";
