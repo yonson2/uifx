@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "description": "React components for @uifx/core.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yonson2/uifx.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://yonson2.github.io/uifx/",
+  "bugs": "https://github.com/yonson2/uifx/issues",
   "type": "module",
   "exports": {
     ".": {
