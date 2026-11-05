@@ -1,7 +1,7 @@
 <!-- The ceiling pull-cord. A pull toggles the theme with a crossfade, or calls onpull when given. -->
 <script>
   import { untrack } from "svelte";
-  import { CORD_CONFIG, PullCord } from "@uifx/core";
+  import { CORD_CONFIG, PullCord } from "@yonson2/uifx";
 
   let { onpull = null, label = "Toggle theme", pressed = null, entrance = true, config = {}, class: className = "", ...rest } = $props();
 

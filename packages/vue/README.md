@@ -1,15 +1,15 @@
-# @uifx/vue
+# @yonson2/uifx-vue
 
-Vue 3 components for [@uifx/core](https://www.npmjs.com/package/@uifx/core).
+Vue 3 components for [@yonson2/uifx](https://www.npmjs.com/package/@yonson2/uifx).
 
 ```sh
-npm install @uifx/vue
+npm install @yonson2/uifx-vue
 ```
 
 ```vue
 <script setup>
-import "@uifx/core/index.css";
-import { PullCord, ReelTitle, ThemeToggle } from "@uifx/vue";
+import "@yonson2/uifx/index.css";
+import { PullCord, ReelTitle, ThemeToggle } from "@yonson2/uifx-vue";
 </script>
 
 <template>

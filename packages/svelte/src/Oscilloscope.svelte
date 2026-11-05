@@ -1,5 +1,5 @@
 <script>
-  import { SCOPE_BLOCKS, SCOPE_WAVE, blockStyle } from "@uifx/core";
+  import { SCOPE_BLOCKS, SCOPE_WAVE, blockStyle } from "@yonson2/uifx";
 
   let { blocks = true, class: className = "", ...rest } = $props();
 </script>

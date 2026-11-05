@@ -1,8 +1,8 @@
-// Vue 3 components for @uifx/core. Render functions, so no build step is needed.
-// Import the styles once: import "@uifx/core/index.css".
+// Vue 3 components for @yonson2/uifx. Render functions, so no build step is needed.
+// Import the styles once: import "@yonson2/uifx/index.css".
 
 import { defineComponent, h, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import { CORD_CONFIG, PixelField as PixelFieldEngine, PullCord as PullCordEngine, ReelTitle as ReelTitleEngine, SCOPE_BLOCKS, SCOPE_WAVE, blockStyle, toggleTheme } from "@uifx/core";
+import { CORD_CONFIG, PixelField as PixelFieldEngine, PullCord as PullCordEngine, ReelTitle as ReelTitleEngine, SCOPE_BLOCKS, SCOPE_WAVE, blockStyle, toggleTheme } from "@yonson2/uifx";
 
 /** A button that switches light and dark with the wave transition. */
 export const ThemeToggle = defineComponent({

@@ -1,8 +1,8 @@
-// Type check of @uifx/core: valid use compiles, each @ts-expect-error line must fail.
+// Type check of @yonson2/uifx: valid use compiles, each @ts-expect-error line must fail.
 import {
   CORD_CONFIG, EFFECT_NAMES, PixelField, PullCord, ReelTitle, SCOPE_BLOCKS, applyOps, blockStyle,
   crossDocumentTheme, makeTypos, modelText, navigateTheme, setTheme, textToBitmap, toggleTheme, transitionTheme, type ReelChangeEvent,
-} from "@uifx/core";
+} from "@yonson2/uifx";
 
 const host = document.createElement("div");
 

@@ -1,5 +1,5 @@
 import { mount, type ComponentProps } from "svelte";
-import { ChromaticImage, PixelField, PullCord, ReelTitle } from "@uifx/svelte";
+import { ChromaticImage, PixelField, PullCord, ReelTitle } from "@yonson2/uifx-svelte";
 
 const target = document.createElement("div");
 const field = mount(PixelField, { target, props: { text: "HI", intro: "middleout", onpress: () => {} } });

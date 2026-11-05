@@ -1,7 +1,7 @@
 import "@fontsource/commit-mono/500.css";
-import "@uifx/core/index.css";
+import "@yonson2/uifx/index.css";
 import "../shared/site.css";
-import { crossDocumentTheme, currentTheme, navigateTheme } from "@uifx/core";
+import { crossDocumentTheme, currentTheme, navigateTheme } from "@yonson2/uifx";
 import { setupChrome } from "../shared/chrome.js";
 
 crossDocumentTheme();

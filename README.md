@@ -16,26 +16,30 @@ The [demo site](https://yonson2.github.io/uifx/) shows every effect, with usage 
 
 | Package | Contents |
 | --- | --- |
-| `@uifx/core` | The effects: CSS files and framework-free classes. No dependencies. |
-| `@uifx/react` | React 19 components. |
-| `@uifx/vue` | Vue 3 components. |
-| `@uifx/svelte` | Svelte 5 components. |
+| `@yonson2/uifx` | The effects: CSS files and framework-free classes. No dependencies. |
+| `@yonson2/uifx-react` | React 19 components. |
+| `@yonson2/uifx-vue` | Vue 3 components. |
+| `@yonson2/uifx-svelte` | Svelte 5 components. |
 
-The packages are not on npm yet. They ship plain JavaScript source, with no build step, and
-hand-written TypeScript declarations (`index.d.ts`).
+```sh
+npm install @yonson2/uifx @yonson2/uifx-react   # or -vue, -svelte
+```
+
+The packages ship plain JavaScript source, with no build step, and hand-written TypeScript
+declarations (`index.d.ts`).
 
 ## Usage
 
 Import the styles once:
 
 ```js
-import "@uifx/core/index.css"; // or one file, for example "@uifx/core/glitch.css"
+import "@yonson2/uifx/index.css"; // or one file, for example "@yonson2/uifx/glitch.css"
 ```
 
 Plain HTML and JavaScript:
 
 ```js
-import { PixelField, PullCord, ReelTitle, toggleTheme } from "@uifx/core";
+import { PixelField, PullCord, ReelTitle, toggleTheme } from "@yonson2/uifx";
 
 new PixelField(document.querySelector("#hero"), { text: "HELLO" }); // the host holds a [data-pf-wordmark] element
 new ReelTitle(document.querySelector("#title"), { rows: ["SPELLING", "RESTORED"] });
@@ -51,7 +55,7 @@ button.onclick = () => toggleTheme(); // sets data-theme on <html> with the wave
 React, Vue and Svelte use the same names:
 
 ```jsx
-import { GlitchText, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark } from "@uifx/react"; // or @uifx/vue, @uifx/svelte
+import { GlitchText, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark } from "@yonson2/uifx-react"; // or @yonson2/uifx-vue, @yonson2/uifx-svelte
 
 <PixelField text="HELLO"><Wordmark /></PixelField>
 <ReelTitle rows={["SPELLING", "RESTORED"]} onChange={(rows) => {}} />
@@ -89,6 +93,7 @@ npm run types     # tsc: the .d.ts files against typed use in tests/types/
 npm run build     # site/dist/
 npx vite preview  # serve the build at http://localhost:4173/
 npm run shots     # Playwright screenshots of the build into shots/ (needs the preview)
+npm run bump 0.2.0  # one version on all four packages, and the lockfile
 ```
 
 `npm run shots` needs the Playwright browser once: `npx playwright install chromium`.
@@ -98,6 +103,12 @@ npm run shots     # Playwright screenshots of the build into shots/ (needs the p
 `.github/workflows/pages.yml` tests, builds and deploys `site/dist` on each push to `main`.
 In the repository settings, set Pages > Source to "GitHub Actions". The build uses relative
 URLs, so it works under `/<repo>/`.
+
+## npm
+
+The four packages share one version. `.github/workflows/publish.yml` publishes each package
+whose version is not on npm yet, on a push to `main`. It uses npm trusted publishing (OIDC),
+so there is no token, and npm adds provenance.
 
 ## Credits and licence
 

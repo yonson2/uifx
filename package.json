@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "shots": "node tools/shots.mjs",
+    "bump": "node tools/bump.mjs",
     "types": "tsc -p tests/types"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import { EFFECT_NAMES } from "@uifx/core";
-import { ChromaticImage, CrtFilter, GlitchText, Oscilloscope, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark } from "@uifx/vue";
+import { EFFECT_NAMES } from "@yonson2/uifx";
+import { ChromaticImage, CrtFilter, GlitchText, Oscilloscope, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark } from "@yonson2/uifx-vue";
 import art from "../shared/art.svg";
 
 const rows = ["SPELLING", "RESTORED"];
@@ -15,7 +15,7 @@ const text = ref(rows.join(" / "));
   <PixelField ref="field" class="hero" text="VUE" aria-label="Pixel field demo">
     <Wordmark />
     <div class="hero-copy" data-pf-quiet>
-      <h1 class="uifx-rise">Every effect, rendered with @uifx/vue.</h1>
+      <h1 class="uifx-rise">Every effect, rendered with @yonson2/uifx-vue.</h1>
       <p class="uifx-rise" style="--uifx-stagger: 1">Move the pointer. Press and hold, then let go. Click the word.</p>
     </div>
   </PixelField>

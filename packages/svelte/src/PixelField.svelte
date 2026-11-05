@@ -1,6 +1,6 @@
 <!-- The animated pixel background with a wordmark. bind:this gives play(name). -->
 <script>
-  import { PixelField } from "@uifx/core";
+  import { PixelField } from "@yonson2/uifx";
 
   let { as = "section", text = "PIXELS", bitmap = null, scale = 2, gap = 1, intro = "rain", ghost = true, onpress = null, class: className = "", children, ...rest } = $props();
 

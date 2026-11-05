@@ -1,7 +1,7 @@
 {
-  "name": "@uifx/svelte",
+  "name": "@yonson2/uifx-svelte",
   "version": "0.1.0",
-  "description": "Svelte 5 components for @uifx/core.",
+  "description": "Svelte 5 components for @yonson2/uifx.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "src"
   ],
   "dependencies": {
-    "@uifx/core": "0.1.0"
+    "@yonson2/uifx": "0.1.0"
   },
   "peerDependencies": {
     "svelte": ">=5.16"

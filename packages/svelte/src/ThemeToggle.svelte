@@ -1,6 +1,6 @@
 <!-- A button that switches light and dark with the wave transition. -->
 <script>
-  import { toggleTheme } from "@uifx/core";
+  import { toggleTheme } from "@yonson2/uifx";
 
   let { children, onclick, ...rest } = $props();
 

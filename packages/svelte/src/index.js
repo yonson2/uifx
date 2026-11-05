@@ -1,4 +1,4 @@
-// Svelte 5 components for @uifx/core. Import the styles once: import "@uifx/core/index.css".
+// Svelte 5 components for @yonson2/uifx. Import the styles once: import "@yonson2/uifx/index.css".
 export { default as ThemeToggle } from "./ThemeToggle.svelte";
 export { default as GlitchText } from "./GlitchText.svelte";
 export { default as CrtFilter } from "./CrtFilter.svelte";

@@ -1,7 +1,7 @@
-// Types for @uifx/react. Hand-written: keep them in step with index.js.
+// Types for @yonson2/uifx-react. Hand-written: keep them in step with index.js.
 
 import type { ButtonHTMLAttributes, ElementType, HTMLAttributes, ImgHTMLAttributes, JSX, Ref } from "react";
-import type { CordConfig, EffectName, PixelFieldOptions } from "@uifx/core";
+import type { CordConfig, EffectName, PixelFieldOptions } from "@yonson2/uifx";
 
 type Div = HTMLAttributes<HTMLDivElement>;
 

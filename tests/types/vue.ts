@@ -1,5 +1,5 @@
 import { h, ref } from "vue";
-import { ChromaticImage, PixelField, PullCord, ReelTitle, Wordmark } from "@uifx/vue";
+import { ChromaticImage, PixelField, PullCord, ReelTitle, Wordmark } from "@yonson2/uifx-vue";
 
 const field = ref<InstanceType<typeof PixelField> | null>(null);
 field.value?.play("decrypt");

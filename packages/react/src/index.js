@@ -1,8 +1,8 @@
-// React components for @uifx/core. Plain createElement, so no build step is needed.
-// Import the styles once: import "@uifx/core/index.css".
+// React components for @yonson2/uifx. Plain createElement, so no build step is needed.
+// Import the styles once: import "@yonson2/uifx/index.css".
 
 import { createElement as h, useEffect, useImperativeHandle, useRef } from "react";
-import { CORD_CONFIG, PixelField as PixelFieldEngine, PullCord as PullCordEngine, ReelTitle as ReelTitleEngine, SCOPE_BLOCKS, SCOPE_WAVE, toggleTheme } from "@uifx/core";
+import { CORD_CONFIG, PixelField as PixelFieldEngine, PullCord as PullCordEngine, ReelTitle as ReelTitleEngine, SCOPE_BLOCKS, SCOPE_WAVE, toggleTheme } from "@yonson2/uifx";
 
 const cx = (...names) => names.filter(Boolean).join(" ");
 

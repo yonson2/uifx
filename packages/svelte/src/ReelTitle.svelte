@@ -1,6 +1,6 @@
 <!-- The editable slot-machine title. bind:this gives replay(); onchange gets the rows. -->
 <script>
-  import { ReelTitle } from "@uifx/core";
+  import { ReelTitle } from "@yonson2/uifx";
 
   let { rows = ["SPELLING", "RESTORED"], editable = true, autoplay = true, typos = true, onchange, class: className = "", ...rest } = $props();
 

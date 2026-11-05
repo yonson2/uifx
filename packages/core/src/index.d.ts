@@ -1,4 +1,4 @@
-// Types for @uifx/core. Hand-written: keep them in step with the JS (npm run types checks the use).
+// Types for @yonson2/uifx. Hand-written: keep them in step with the JS (npm run types checks the use).
 
 // Theme helpers (theme-transition.js)
 

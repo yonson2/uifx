@@ -1,5 +1,5 @@
 import "@fontsource/commit-mono/500.css";
-import "@uifx/core/index.css";
+import "@yonson2/uifx/index.css";
 import "../shared/site.css";
 import { createApp } from "vue";
 import { setupChrome } from "../shared/chrome.js";

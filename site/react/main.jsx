@@ -1,10 +1,10 @@
 import "@fontsource/commit-mono/500.css";
-import "@uifx/core/index.css";
+import "@yonson2/uifx/index.css";
 import "../shared/site.css";
 import { StrictMode, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { EFFECT_NAMES } from "@uifx/core";
-import { ChromaticImage, CrtFilter, GlitchText, Oscilloscope, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark } from "@uifx/react";
+import { EFFECT_NAMES } from "@yonson2/uifx";
+import { ChromaticImage, CrtFilter, GlitchText, Oscilloscope, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark } from "@yonson2/uifx-react";
 import { setupChrome } from "../shared/chrome.js";
 import art from "../shared/art.svg";
 
@@ -20,7 +20,7 @@ function App() {
       <PixelField ref={field} className="hero" text="REACT" aria-label="Pixel field demo">
         <Wordmark />
         <div className="hero-copy" data-pf-quiet>
-          <h1 className="uifx-rise">Every effect, rendered with @uifx/react.</h1>
+          <h1 className="uifx-rise">Every effect, rendered with @yonson2/uifx-react.</h1>
           <p className="uifx-rise" style={{ "--uifx-stagger": 1 }}>
             Move the pointer. Press and hold, then let go. Click the word.
           </p>

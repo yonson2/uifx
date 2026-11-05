@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { ChromaticImage, GlitchText, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark, type PixelFieldHandle, type ReelTitleHandle } from "@uifx/react";
+import { ChromaticImage, GlitchText, PixelField, PullCord, ReelTitle, ThemeToggle, Wordmark, type PixelFieldHandle, type ReelTitleHandle } from "@yonson2/uifx-react";
 
 export function App() {
   const field = useRef<PixelFieldHandle>(null);

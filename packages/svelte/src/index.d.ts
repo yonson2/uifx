@@ -1,8 +1,8 @@
-// Types for @uifx/svelte. Hand-written: keep them in step with the .svelte files.
+// Types for @yonson2/uifx-svelte. Hand-written: keep them in step with the .svelte files.
 
 import type { Component, Snippet } from "svelte";
 import type { HTMLAttributes, HTMLButtonAttributes, HTMLImgAttributes } from "svelte/elements";
-import type { CordConfig, EffectName } from "@uifx/core";
+import type { CordConfig, EffectName } from "@yonson2/uifx";
 
 type Div = HTMLAttributes<HTMLDivElement>;
 

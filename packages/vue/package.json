@@ -1,7 +1,7 @@
 {
-  "name": "@uifx/vue",
+  "name": "@yonson2/uifx-vue",
   "version": "0.1.0",
-  "description": "Vue 3 components for @uifx/core.",
+  "description": "Vue 3 components for @yonson2/uifx.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "src"
   ],
   "dependencies": {
-    "@uifx/core": "0.1.0"
+    "@yonson2/uifx": "0.1.0"
   },
   "peerDependencies": {
     "vue": ">=3.3"

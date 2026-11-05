@@ -1,7 +1,7 @@
 import "@fontsource/commit-mono/500.css";
-import "@uifx/core/index.css";
+import "@yonson2/uifx/index.css";
 import "./shared/site.css";
-import { CHARSET, EFFECT_NAMES, PixelField, PullCord, ReelTitle, SCOPE_BLOCKS, SCOPE_WAVE, blockStyle, toggleTheme } from "@uifx/core";
+import { CHARSET, EFFECT_NAMES, PixelField, PullCord, ReelTitle, SCOPE_BLOCKS, SCOPE_WAVE, blockStyle, toggleTheme } from "@yonson2/uifx";
 import { setupChrome } from "./shared/chrome.js";
 
 setupChrome();

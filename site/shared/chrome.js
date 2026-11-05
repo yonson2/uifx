@@ -1,6 +1,6 @@
 // Page chrome shared by the four demo pages: theme buttons and usage tabs.
 
-import { setTheme } from "@uifx/core";
+import { setTheme } from "@yonson2/uifx";
 import { SNIPPETS } from "./snippets.js";
 
 export function setupChrome() {

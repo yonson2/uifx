@@ -1,14 +1,14 @@
-# @uifx/react
+# @yonson2/uifx-react
 
-React 19 components for [@uifx/core](https://www.npmjs.com/package/@uifx/core).
+React 19 components for [@yonson2/uifx](https://www.npmjs.com/package/@yonson2/uifx).
 
 ```sh
-npm install @uifx/react
+npm install @yonson2/uifx-react
 ```
 
 ```jsx
-import "@uifx/core/index.css";
-import { PullCord, ReelTitle, ThemeToggle } from "@uifx/react";
+import "@yonson2/uifx/index.css";
+import { PullCord, ReelTitle, ThemeToggle } from "@yonson2/uifx-react";
 
 <ReelTitle rows={["SPELLING", "RESTORED"]} onChange={(rows) => {}} />
 <PullCord />

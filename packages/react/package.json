@@ -1,7 +1,7 @@
 {
-  "name": "@uifx/react",
+  "name": "@yonson2/uifx-react",
   "version": "0.1.0",
-  "description": "React components for @uifx/core.",
+  "description": "React components for @yonson2/uifx.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
     "src"
   ],
   "dependencies": {
-    "@uifx/core": "0.1.0"
+    "@yonson2/uifx": "0.1.0"
   },
   "peerDependencies": {
     "react": ">=19"

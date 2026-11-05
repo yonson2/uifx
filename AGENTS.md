@@ -7,7 +7,7 @@
 ## What uifx is
 
 uifx is a set of web effects ported from the sites that made
-them. Each effect has a framework-free core (`@uifx/core`) and thin wrappers for
+them. Each effect has a framework-free core (`@yonson2/uifx`) and thin wrappers for
 React, Vue and Svelte. A demo site on GitHub Pages shows every effect, for every framework.
 
 The repo is public.
@@ -48,7 +48,7 @@ The repo is public.
   credited (D10).
 - **No brand assets:** no logos, wordmark bitmaps or brand names from the source sites in
   the demo content (D11).
-- **Core first:** behaviour lives in `@uifx/core`. A wrapper only creates, updates and
+- **Core first:** behaviour lives in `@yonson2/uifx`. A wrapper only creates, updates and
   destroys the engine and maps props and events. A new effect ships in all four forms
   (HTML, React, Vue, Svelte) and on the demo site.
 - **Reduced motion:** every effect checks `prefers-reduced-motion` and stays usable
@@ -71,6 +71,20 @@ The repo is public.
   abstraction. Comments say why, not what.
 - Pin exact dependency versions in `package.json`.
 
+## Versions
+
+- The four packages share one version. Set it with `npm run bump <x.y.z>`: it also sets the
+  wrappers' core dependency and updates the lockfile.
+- Bump without asking (D16) when a change alters what a package ships: code, types, CSS,
+  exports or dependencies. Changes to the site, tests, tools or docs need no bump.
+- Semver for 0.x: a fix is a patch (0.1.0 to 0.1.1), a new feature or a breaking change is
+  a minor (0.1.0 to 0.2.0).
+- One bump per release: when the current version is not on npm yet
+  (`npm view @yonson2/uifx@<version>`), an earlier unpushed commit has bumped it already.
+  Raise it again only for a larger step.
+- Put the bump in the commit of the change. The owner's push to `main` publishes it
+  (`publish.yml`).
+
 ## Git
 
 - Commit only when the owner asks. Messages are short.
@@ -80,7 +94,7 @@ The repo is public.
 
 ## Commands
 
-- Install: `npm install` (links `packages/*` into `node_modules/@uifx/`)
+- Install: `npm install` (links `packages/*` into `node_modules/@yonson2/`)
 - Dev server: `npm run dev` (<http://localhost:5173/>, pages `/`, `/react/`, `/vue/`, `/svelte/`)
 - Tests: `npm test`
 - Types: `npm run types` (tsc over `tests/types/`; a `@ts-expect-error` line that stops
@@ -92,7 +106,8 @@ The repo is public.
   browser once: `npx playwright install chromium`.
 - Containers, if ever needed: Podman, never Docker Desktop.
 - CI: `.github/workflows/pages.yml` tests, builds and deploys to GitHub Pages on push to
-  `main`; pull requests only test and build.
+  `main`; pull requests only test and build. `.github/workflows/publish.yml` publishes new
+  package versions to npm on push to `main`.
 
 ## Verification culture
 

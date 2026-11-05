@@ -1,5 +1,5 @@
 {
-  "name": "@uifx/core",
+  "name": "@yonson2/uifx",
   "version": "0.1.0",
   "description": "Framework-free effects: theme wave transition, CSS glitch kit, reel title, pixel field, pull-cord.",
   "license": "MIT",

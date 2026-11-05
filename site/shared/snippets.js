@@ -1,6 +1,6 @@
 // Usage snippets for the gallery page, one set per effect.
 
-const css = `import "@uifx/core/index.css";`;
+const css = `import "@yonson2/uifx/index.css";`;
 
 export const SNIPPETS = {
   pixelField: {
@@ -10,13 +10,13 @@ export const SNIPPETS = {
 </section>
 
 <script type="module">
-  import { PixelField } from "@uifx/core";
+  import { PixelField } from "@yonson2/uifx";
   ${css}
 
   const field = new PixelField(document.getElementById("hero"), { text: "HELLO" });
   field.play("decrypt"); // rain, decrypt, scatter, sweep, middleout, unstable, burn, random
 </script>`,
-    React: `import { PixelField, Wordmark } from "@uifx/react";
+    React: `import { PixelField, Wordmark } from "@yonson2/uifx-react";
 ${css}
 
 const field = useRef(null); // field.current.play("burn")
@@ -26,7 +26,7 @@ const field = useRef(null); // field.current.play("burn")
   <div data-pf-quiet>Copy here keeps the noise calm.</div>
 </PixelField>`,
     Vue: `<script setup>
-import { PixelField, Wordmark } from "@uifx/vue";
+import { PixelField, Wordmark } from "@yonson2/uifx-vue";
 ${css}
 const field = ref(null); // field.value.play("burn")
 </script>
@@ -38,7 +38,7 @@ const field = ref(null); // field.value.play("burn")
   </PixelField>
 </template>`,
     Svelte: `<script>
-  import { PixelField, Wordmark } from "@uifx/svelte";
+  import { PixelField, Wordmark } from "@yonson2/uifx-svelte";
   ${css}
   let field; // field.play("burn")
 </script>
@@ -53,14 +53,14 @@ const field = ref(null); // field.value.play("burn")
     HTML: `<div id="title"></div>
 
 <script type="module">
-  import { ReelTitle } from "@uifx/core";
+  import { ReelTitle } from "@yonson2/uifx";
   ${css}
 
   const title = new ReelTitle(document.getElementById("title"), { rows: ["SPELLING", "RESTORED"] });
   document.getElementById("title").addEventListener("reelchange", (e) => console.log(e.detail.rows));
   title.replay();
 </script>`,
-    React: `import { ReelTitle } from "@uifx/react";
+    React: `import { ReelTitle } from "@yonson2/uifx-react";
 
 <ReelTitle ref={title} rows={["SPELLING", "RESTORED"]} onChange={(rows) => console.log(rows)} />`,
     Vue: `<ReelTitle ref="title" :rows="['SPELLING', 'RESTORED']" @change="(rows) => console.log(rows)" />`,
@@ -83,7 +83,7 @@ const field = ref(null); // field.value.play("burn")
   <span class="uifx-glitch-block" style="left:12%;top:18%;width:18%;height:24%"></span>
 </div>
 <a class="uifx-glitch-card" href="#">...</a>`,
-    React: `import { ChromaticImage, CrtFilter, GlitchText, Oscilloscope } from "@uifx/react";
+    React: `import { ChromaticImage, CrtFilter, GlitchText, Oscilloscope } from "@yonson2/uifx-react";
 
 <CrtFilter><img src={art} alt="" /></CrtFilter>
 <ChromaticImage src={art} variant="layers" />   {/* shadow, jitter, layers, crt */}
@@ -103,7 +103,7 @@ const field = ref(null); // field.value.play("burn")
     HTML: `<button id="toggle">Toggle theme</button>
 
 <script type="module">
-  import { restoreTheme, setTheme, toggleTheme, transitionTheme } from "@uifx/core";
+  import { restoreTheme, setTheme, toggleTheme, transitionTheme } from "@yonson2/uifx";
   ${css}
 
   restoreTheme(); // early, before the first paint
@@ -116,7 +116,7 @@ const field = ref(null); // field.value.play("burn")
   :root { --uifx-wave-duration: 1.5s; --uifx-wave-humps: 1.5; --uifx-wave-amplitude: 10%; }
   :root[data-theme="dark"] { /* your dark tokens */ }
 </style>`,
-    React: `import { ThemeToggle } from "@uifx/react";
+    React: `import { ThemeToggle } from "@yonson2/uifx-react";
 
 <ThemeToggle>Toggle theme</ThemeToggle>`,
     Vue: `<ThemeToggle>Toggle theme</ThemeToggle>`,
@@ -130,7 +130,7 @@ const field = ref(null); // field.value.play("burn")
 </style>
 
 <script type="module">
-  import { crossDocumentTheme, navigateTheme, restoreTheme } from "@uifx/core";
+  import { crossDocumentTheme, navigateTheme, restoreTheme } from "@yonson2/uifx";
   ${css}
 
   restoreTheme(); // early, before the first paint
@@ -146,7 +146,7 @@ const field = ref(null); // field.value.play("burn")
     HTML: `<div id="cord"></div>
 
 <script type="module">
-  import { PullCord } from "@uifx/core";
+  import { PullCord } from "@yonson2/uifx";
   ${css}
 
   // A pull toggles the theme with a crossfade. Pass onPull to do something else.
@@ -156,7 +156,7 @@ const field = ref(null); // field.value.play("burn")
 <style>
   :root { --uifx-cord-top: 0px; --uifx-cord-right: 7rem; --uifx-cord-z: 5; }
 </style>`,
-    React: `import { PullCord } from "@uifx/react";
+    React: `import { PullCord } from "@yonson2/uifx-react";
 
 <PullCord label="Toggle theme" config={{ gravity: 1250, damping: 0.94 }} />`,
     Vue: `<PullCord label="Toggle theme" :config="{ gravity: 1250, damping: 0.94 }" />`,

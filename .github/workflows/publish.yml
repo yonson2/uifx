@@ -1,0 +1,41 @@
+name: Publish
+
+# Publishes each package whose version is not on npm yet. npm trusts this workflow
+# through OIDC (trusted publishing), so there is no token, and npm adds provenance.
+on:
+  push:
+    branches: [main]
+    paths: [packages/**]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - run: npm ci
+      - run: npm test
+      - run: npm run types
+      - run: |
+          for dir in packages/core packages/react packages/vue packages/svelte; do
+            name=$(node -p "require('./$dir/package.json').name")
+            version=$(node -p "require('./$dir/package.json').version")
+            if npm view "$name@$version" version > /dev/null 2>&1; then
+              echo "$name@$version is on npm"
+            else
+              npm publish -w "$dir" --access public
+            fi
+          done

@@ -1,15 +1,15 @@
-# @uifx/svelte
+# @yonson2/uifx-svelte
 
-Svelte 5 components for [@uifx/core](https://www.npmjs.com/package/@uifx/core).
+Svelte 5 components for [@yonson2/uifx](https://www.npmjs.com/package/@yonson2/uifx).
 
 ```sh
-npm install @uifx/svelte
+npm install @yonson2/uifx-svelte
 ```
 
 ```svelte
 <script>
-  import "@uifx/core/index.css";
-  import { PullCord, ReelTitle, ThemeToggle } from "@uifx/svelte";
+  import "@yonson2/uifx/index.css";
+  import { PullCord, ReelTitle, ThemeToggle } from "@yonson2/uifx-svelte";
 </script>
 
 <ReelTitle rows={["SPELLING", "RESTORED"]} onchange={(rows) => {}} />

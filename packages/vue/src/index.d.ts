@@ -1,8 +1,8 @@
-// Types for @uifx/vue. Hand-written: keep them in step with index.js.
+// Types for @yonson2/uifx-vue. Hand-written: keep them in step with index.js.
 // Listener props (onChange, onPress, onPull) are what @change, @press and @pull bind to.
 
 import type { DefineComponent } from "vue";
-import type { CordConfig, EffectName } from "@uifx/core";
+import type { CordConfig, EffectName } from "@yonson2/uifx";
 
 /** A button that switches light and dark with the wave transition. */
 export const ThemeToggle: DefineComponent<{}>;

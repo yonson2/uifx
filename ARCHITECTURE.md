@@ -9,7 +9,7 @@
 ```
 .
 ├── packages/
-│   ├── core/                    @uifx/core: the effects, framework-free
+│   ├── core/                    @yonson2/uifx: the effects, framework-free
 │   │   └── src/
 │   │       ├── index.js         public JS API (re-exports); index.d.ts: its types
 │   │       ├── index.css        all effect styles (@import of the files below)
@@ -18,19 +18,21 @@
 │   │       ├── reel-title/      model.js (pure editing model) + reel-title.{js,css} (SVG engine)
 │   │       ├── pixel-field/     pixel-field.{js,css} (canvas engine), effects.js, font.js
 │   │       └── pull-cord/       pull-cord.{js,css} (Verlet rope), LICENSE (MIT, upstream)
-│   ├── react/src/index.js       @uifx/react: createElement wrappers (no JSX, no build) + index.d.ts
-│   ├── vue/src/index.js         @uifx/vue: defineComponent + h() wrappers (no SFC, no build) + index.d.ts
-│   └── svelte/src/*.svelte      @uifx/svelte: Svelte 5 components (runes) + index.d.ts
+│   ├── react/src/index.js       @yonson2/uifx-react: createElement wrappers (no JSX, no build) + index.d.ts
+│   ├── vue/src/index.js         @yonson2/uifx-vue: defineComponent + h() wrappers (no SFC, no build) + index.d.ts
+│   └── svelte/src/*.svelte      @yonson2/uifx-svelte: Svelte 5 components (runes) + index.d.ts
 ├── site/                        demo site, Vite root (multi-page)
-│   ├── index.html, main.js      gallery: plain HTML + @uifx/core, docs and usage tabs
-│   ├── react/                   the same effects through @uifx/react
-│   ├── vue/                     ... through @uifx/vue
-│   ├── svelte/                  ... through @uifx/svelte
+│   ├── index.html, main.js      gallery: plain HTML + @yonson2/uifx, docs and usage tabs
+│   ├── react/                   the same effects through @yonson2/uifx-react
+│   ├── vue/                     ... through @yonson2/uifx-vue
+│   ├── svelte/                  ... through @yonson2/uifx-svelte
 │   ├── mpa/                     two plain pages: the wave across a page load
 │   └── shared/                  site.css, chrome.js (theme buttons, tabs), snippets.js, art.svg
 ├── tests/                       Vitest unit tests of the pure modules; types/: tsc check of the .d.ts
 ├── tools/shots.mjs              Playwright screenshots of the built site
+├── tools/bump.mjs               sets one version on all packages (npm run bump)
 ├── .github/workflows/pages.yml  CI: test, build, deploy to GitHub Pages
+├── .github/workflows/publish.yml  CI: publish new package versions to npm
 ├── vite.config.js               Vite (site build) + Vitest config
 ├── AGENTS.md                    working agreements for humans and agents
 └── issues/                      local issue tracker (gitignored, D2)
@@ -41,13 +43,13 @@
 There is no server. Everything runs in the browser.
 
 ```
-                ┌──────────────── @uifx/core ────────────────┐
+                ┌────────────── @yonson2/uifx ───────────────┐
  HTML page ───▶ │ CSS (classes, custom properties, keyframes)│
                 │ JS engines: ReelTitle, PixelField, PullCord│
                 │ theme helpers ── document.startViewTransition
                 └───────▲───────────────▲───────────────▲────┘
                         │               │               │
-                 @uifx/react      @uifx/vue      @uifx/svelte
+                 @yonson2/uifx-react, -vue, -svelte
                  (thin wrappers: create the engine on mount,
                   destroy it on unmount, map props/events)
 
@@ -58,7 +60,7 @@ There is no server. Everything runs in the browser.
 
 ### 3.1 Frontend
 
-**@uifx/core** holds all behaviour. Each JS effect is a class that takes a host element and
+**@yonson2/uifx** holds all behaviour. Each JS effect is a class that takes a host element and
 options, builds its DOM inside the host, and has `destroy()`.
 
 - **Theme wave** (`theme-transition/`). `transitionTheme(update)` adds the class
@@ -130,6 +132,10 @@ None.
 - `.github/workflows/pages.yml`: on push to `main`, `npm ci`, `npm test`, `npm run types`, `npm run build`,
   then upload `site/dist` and deploy with `actions/deploy-pages`. Pull requests run the
   test and build only.
+- `.github/workflows/publish.yml`: on a push to `main` that changes `packages/`, `npm ci`,
+  `npm test`, `npm run types`, then `npm publish` for each package whose version is not on
+  npm yet (core first). npm trusts the workflow through OIDC (trusted publishing): no
+  token, and npm adds provenance. The four packages share one version (`npm run bump`).
 - `base: "./"` in `vite.config.js` makes every URL relative, so the site works under
   `https://<user>.github.io/<repo>/`.
 - The repository owner creates the GitHub repo, pushes, and sets Pages > Source to
@@ -146,7 +152,7 @@ None.
 ## 8. Development & Testing Environment
 
 - Node 24, npm workspaces (`packages/*`). `npm install` links the packages into
-  `node_modules/@uifx/`.
+  `node_modules/@yonson2/`.
 - `npm run dev`: Vite dev server for the site. `npm run build`: `site/dist`.
 - `npm test`: Vitest over `tests/` (the pure modules: reel model and typos, font, entrance
   effects).
@@ -157,7 +163,7 @@ None.
 
 ## 9. Future Considerations / Roadmap
 
-See `issues/README.md` (local). Open topic: npm publishing.
+See `issues/README.md` (local).
 
 ## 10. Project Identification
 
@@ -165,12 +171,13 @@ See `issues/README.md` (local). Open topic: npm publishing.
 - Licence: MIT (`LICENSE`)
 - Repository: https://github.com/yonson2/uifx
 - Demo: https://yonson2.github.io/uifx/
+- npm: `@yonson2/uifx`, `@yonson2/uifx-react`, `@yonson2/uifx-vue`, `@yonson2/uifx-svelte`
 - Contact: the repository owner
-- Last updated: 2026-11-04
+- Last updated: 2026-11-05
 
 ## 11. Glossary / Acronyms
 
-- **Engine**: the framework-free class in `@uifx/core` behind a component.
+- **Engine**: the framework-free class in `@yonson2/uifx` behind a component.
 - **Host**: the element an engine builds into.
 - **View transition**: the browser API that snapshots the page before and after a DOM
   change and animates between them (`::view-transition-old/new(root)`).
