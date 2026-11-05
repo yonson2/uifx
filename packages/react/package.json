@@ -1,6 +1,6 @@
 {
   "name": "@yonson2/uifx-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React components for @yonson2/uifx.",
   "license": "MIT",
   "repository": {
@@ -21,7 +21,7 @@
     "src"
   ],
   "dependencies": {
-    "@yonson2/uifx": "0.1.0"
+    "@yonson2/uifx": "0.1.1"
   },
   "peerDependencies": {
     "react": ">=19"
